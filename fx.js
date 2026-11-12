@@ -1,5 +1,5 @@
 // 接待麻雀：画面の上に重ねる2Dの絵（文字・吹き出し・手牌・ハンコなど）。動画にも同じものを描く
-import { CW, CH, cl, eo, eb, ez, hash } from './world.js?v=2';
+import { CW, CH, cl, eo, eb, ez, hash } from './world.js?v=3';
 if (typeof CanvasRenderingContext2D !== 'undefined' && !CanvasRenderingContext2D.prototype.roundRect) CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) { r = Math.max(0, Math.min(typeof r === 'number' ? r : (r && r[0]) || 0, Math.abs(w) / 2, Math.abs(h) / 2)); this.moveTo(x + r, y); this.arcTo(x + w, y, x + w, y + h, r); this.arcTo(x + w, y + h, x, y + h, r); this.arcTo(x, y + h, x, y, r); this.arcTo(x, y, x + w, y, r); this.closePath(); return this; };
 export const FONT = '"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic","Noto Sans CJK JP","Noto Sans JP","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif';
 export const SERIF = '"Hiragino Mincho ProN","Yu Mincho","Noto Serif CJK JP","Noto Serif JP","Songti TC","AppleMyungjo",serif';

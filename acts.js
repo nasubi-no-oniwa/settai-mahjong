@@ -1,6 +1,6 @@
 // 接待麻雀：場面（はじめのムービー・迷う3秒・ロンの5秒・それぞれのエンド）。どれも「場面が始まってからの秒 t」だけで絵が決まる
-import { TW, TH, TD, TY, cl, K, ez, eo, ei, eb, lerp, hash, V3, sp, HANDS } from './world.js?v=2';
-import * as FX from './fx.js?v=2';
+import { TW, TH, TD, TY, cl, K, ez, eo, ei, eb, lerp, hash, V3, sp, HANDS } from './world.js?v=3';
+import * as FX from './fx.js?v=3';
 export function mkActs(W, atlas) {
   const C = W.C, SF = C.sf, BK = C.bk, ON = C.on, BU = C.bu, ST = C.st, P1 = C.p1, P2 = C.p2, TRI = [SF, BK, ON];
   const D = (V, f) => V.q.push(f);
@@ -87,14 +87,14 @@ export function mkActs(W, atlas) {
   const discard = (t, a = 0, b = .45) => { const k = ez(K(t, a, b)), o = W.dr[3], m = o.m; m.position.lerpVectors(HOLD(a), o.pR, k); m.position.y += Math.sin(k * Math.PI) * .08; m.quaternion.slerpQuaternions(o.qH, o.qR, k); if (k < 1) { BU.reach('R', m.position.clone().add(V3(0, .04, 0)), 1); BU.ln = .22; } };
   A.dec = {
     len: 5.6, sfx: [[.43, 'clack', 1.6], [.46, 'zap', .7], [1.2, 'heart'], [2.2, 'heart'], [3.2, 'heart', 1.2], [4.0, 'heart', 1.3], [4.6, 'heart', 1.4], [5.1, 'heart', 1.5]],
-    run(t, V) { idle(t); draws(1, 1, 1, 0); discard(t); camDV(V, t); const k = K(t, .4, .6); TRI.forEach(c => shock(c, k * .8)); if (t > .45) { whitePop(V, t); TRI.forEach((c, i) => D(V, () => { const p = hpos(c, .3); FX.slam(V.g, t - .5 - i * .08, '！', p.x + V.u * 20, p.y, V.u * 30, '#ff4a3a', '#fff', {}); })); } flashT(V, t, .43, .2, '#fff', .5); tags(V); hud(V); say(V, t, .1, 1.2, BU, 'd_bu'); }
+    run(t, V) { idle(t); draws(1, 1, 1, 0); discard(t); cam(V, t, DVP, DVL, lerp(.98, .9, ez(K(t, .6, 5.6))), 1.25); { const a = K(t, 3.4, 5.6) * (.55 + .45 * Math.sin(t * 9)); if (a > 0) D(V, () => { const g = V.g, r = Math.hypot(V.w, V.h) / 2, gr = g.createRadialGradient(V.w / 2, V.h / 2, r * .32, V.w / 2, V.h / 2, r); gr.addColorStop(0, 'rgba(255,40,30,0)'); gr.addColorStop(1, 'rgba(255,40,30,' + (.8 * a).toFixed(3) + ')'); g.fillStyle = gr; g.fillRect(0, 0, V.w, V.h); }); } const k = K(t, .4, .6); TRI.forEach(c => shock(c, k * .8)); if (t > .45) { whitePop(V, t); TRI.forEach((c, i) => D(V, () => { const p = hpos(c, .3); FX.slam(V.g, t - .5 - i * .08, '！', p.x + V.u * 20, p.y, V.u * 30, '#ff4a3a', '#fff', {}); })); } flashT(V, t, .43, .2, '#fff', .5); tags(V); hud(V); say(V, t, .1, 1.2, BU, 'd_bu'); }
   };
 
   // ===== ロン！（3人で役満 → 部長が泣く → 連れていかれる → 「クビだからな」） =====
   { const coins = []; for (let i = 0; i < 42; i++)coins.push([11.0 + i * .085, 'coin', 1 + (i % 8) * .05, .7]);
     A.ron = {
       len: 22.8, clip: [0, 22.2],
-      sfx: [[0, 'ron', 1], [.55, 'ron', 1.12], [1.1, 'ron', 1.26], [1.75, 'pop'], [2.15, 'slam', 1.2], [2.15, 'gong'], ...yakuSfx(2.9), ...yakuSfx(5.45), ...yakuSfx(8.0, 1.25), [9.0, 'chime'], ...coins, [12.4, 'whoosh'], [12.9, 'whoosh'], [13.4, 'whoosh'], [13.5, 'pop'], [14.0, 'whoosh'], [14.3, 'slam'], [14.7, 'sad'], [15.3, 'cry', 1.9], [15.5, 'thud', .6], [15.9, 'thud', .6], [16.3, 'thud', .6], [16.7, 'thud', .6], [17.5, 'door', .6], [17.7, 'step'], [17.95, 'step'], [18.2, 'step'], [18.7, 'cry', 1.0, .7], [19.0, 'step'], [19.3, 'step'], [19.6, 'step'], [20.0, 'slam', 1.3], [20.0, 'buzz'], [21.4, 'door', 1.4]],
+      sfx: [[0, 'ron', 1], [.55, 'ron', 1.12], [1.1, 'ron', 1.26], [1.75, 'pop'], [2.15, 'slam', 1.2], [2.15, 'gong'], ...yakuSfx(2.9), ...yakuSfx(5.45), ...yakuSfx(8.0, 1.25), [9.0, 'chime'], ...coins, [11.9, 'buzz'], [11.9, 'slam', .9], [12.4, 'whoosh'], [12.9, 'whoosh'], [13.4, 'whoosh'], [13.5, 'pop'], [13.75, 'whoosh'], [14.0, 'whoosh'], [14.3, 'slam'], [14.7, 'sad'], [15.3, 'cry', 1.9], [15.5, 'thud', .6], [15.9, 'thud', .6], [16.3, 'thud', .6], [16.7, 'thud', .6], [17.5, 'door', .6], [17.7, 'step'], [17.95, 'step'], [18.2, 'step'], [18.7, 'cry', 1.0, .7], [19.0, 'step'], [19.3, 'step'], [19.6, 'step'], [20.0, 'slam', 1.3], [20.0, 'buzz'], [21.4, 'door', 1.4]],
       run(t, V) {
         idle(t); draws(1, 1, 1, 1); const up = 1 - K(t, 2.5, 2.9);
         ronUp(SF, t, 0, up); ronUp(BK, t, .55, up); ronUp(ON, t, 1.1, up);
@@ -115,6 +115,9 @@ export function mkActs(W, atlas) {
           TRI.forEach((c, i) => { smile(c, 1); c.hL.set(-.2, .95 + Math.abs(Math.sin(t * 7 + i)) * .12, .34); c.hR.set(.2, .95 + Math.abs(Math.cos(t * 7 + i)) * .12, .34); });
           D(V, () => { const g = V.g, u = V.u, p = hpos(BU, .32); const s = num(sc); const px = u * (30 + (sc < 0 ? 8 : 0)); FX.txt(g, s, cl(p.x, u * 90, V.w - u * 90) + (sc < 0 ? Math.sin(t * 50) * u * 2 : 0), Math.max(u * 40, p.y), px, sc < 0 ? '#ff4a3a' : '#fff', '#16192e', px * .26); if (t >= 13.4 && t < 14.6) { const q = hpos(BU, .16); FX.mark(g, 'spark', q.x - u * 16, q.y, u * 26 * (1 + .3 * Math.sin(t * 20)), t); FX.mark(g, 'spark', q.x + u * 14, q.y - u * 10, u * 16, t); } if (t >= 14.4) { const q = hpos(BU, .25 + (t - 14.4) * .5); g.globalAlpha = cl(1.6 - (t - 14.4) * 1.6); FX.mark(g, 'soul', q.x + u * 10, q.y, u * 34, t); g.globalAlpha = 1; } });
           slamT(V, t, 14.3, '#' + V.T('pay') + '　' + V.T('pt', { n: '160,000' }), .5, .13, 34, '#fff', '#c4201c', {});
+          D(V, () => { const g = V.g, u = V.u, gk = ez(K(t, 11.0, 14.6)); [[SF, 32000], [BK, 32000], [ON, 96000]].forEach(([c, n]) => { const p = hpos(c, .3), s = '+' + num(Math.round(n * gk / 100) * 100); FX.txt(g, s, cl(p.x, u * 70, V.w - u * 70), Math.max(u * 30, p.y - Math.abs(Math.sin(t * 9)) * u * 4), u * (n > 50000 ? 26 : 21), '#ffe27a', '#5a1a00', u * 6); });
+            const it = V.T('items'), ps = [[P.wallet, 12.4], [P.watch, 12.9], [P.wig, 13.4], [P.jacket, 13.75], [P.iou, 14.0]]; ps.forEach(([m, t0], i) => { const dt = t - t0; if (dt < 0 || dt > 1.1) return; const p = W.pj(m.position); FX.pill(g, it[i], p.x, p.y - u * 22, u * 13, '#fff', '#c4201c', { line: '#c4201c', a: cl((1.1 - dt) * 4) }); }); });
+          slamT(V, t, 11.9, 'tobi', .5, .13, 60, '#ff3b30', '#fff', { hold: 1.3, rot: -.06, sh: '#7a0000' }); flashT(V, t, 11.9, .2, '#ff3b30', .35);
         }
         else if (t < 17.4) { cam(V, t, [.2, 1.3, .42], [-.88, 1.12, 0], .46, .44); spoils(); BU.wig.visible = false; BU.wh = 1; cryP(BU, t, 1); BU.ln = .25; BU.hL.set(-.2, .8 + Math.abs(Math.sin(t * 7.8)) * .3, .36); BU.hR.set(.2, .8 + Math.abs(Math.cos(t * 7.8)) * .3, .36); W.TBL.position.y = Math.abs(Math.sin(t * 15.6)) * .006; W.shake = .006; slamT(V, t, 15.3, 'bu_cry', .5, .2, 60, '#6ec6ff', '#16304a', { jit: V.u * 2.5 }); }
         else if (t < 19.8) { cam(V, t, [1.5, 1.9, 2.1], [-1.0, 1.0, -.9], 1.2, 1.0); spoils(); BU.wig.visible = false; BU.wh = 1; W.door.rotation.y = -1.75 * ez(K(t, 17.4, 17.8));
@@ -131,7 +134,7 @@ export function mkActs(W, atlas) {
     };
   }
   // ===== 「終わる」を押さずに待つ（wt：待った秒） =====
-  A.wait = { len: 1e9, sfx: [], run(t, V) { idle(t); camDV(V, t); postRon(); TRI.forEach((c, i) => { if (((t + i * 2) % 7) < 3) say(V, t, 0, 1e9, c, 'dots', { px: 14 }); c.hp = .12; }); if (t > 50) { W.dglass.material.color.set(Math.floor(t * 3) % 2 ? 0xff5a5a : 0x5a7aff); nerv(t, K(t, 50, 53)); TRI.forEach(c => { c.hy = c === SF ? .7 : c === BK ? 0 : -.5; }); } hud(V); } };
+  A.wait = { len: 1e9, sfx: [], run(t, V) { idle(t); camDV(V, t); postRon(); if (t > 32) { const r = cl((t - 32) / 22); if (Math.floor(t * .5) % 3 === 0) W.door.rotation.y = -Math.abs(Math.sin(t * 31)) * .03 * r; if (t > 38 && t <= 50 && (t % 5) < 1.3) TRI.forEach(c => { c.hy = c === SF ? .7 : c === BK ? .2 : -.5; c.es = 1.1; }); } TRI.forEach((c, i) => { if (((t + i * 2) % 7) < 3) say(V, t, 0, 1e9, c, 'dots', { px: 14 }); c.hp = .12; }); if (t > 50) { W.dglass.material.color.set(Math.floor(t * 3) % 2 ? 0xff5a5a : 0x5a7aff); nerv(t, K(t, 50, 53)); TRI.forEach(c => { c.hy = c === SF ? .7 : c === BK ? 0 : -.5; }); } hud(V); } };
   // ===== 逮捕（プレミアム） =====
   A.arrest = {
     len: 11.6, clip: [0, 11.4],
