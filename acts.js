@@ -1,6 +1,6 @@
 // 接待麻雀：場面（はじめのムービー・迷う3秒・ロンの5秒・それぞれのエンド）。どれも「場面が始まってからの秒 t」だけで絵が決まる
-import { TW, TH, TD, TY, cl, K, ez, eo, ei, eb, lerp, hash, V3, sp, HANDS } from './world.js?v=1';
-import * as FX from './fx.js?v=1';
+import { TW, TH, TD, TY, cl, K, ez, eo, ei, eb, lerp, hash, V3, sp, HANDS } from './world.js?v=2';
+import * as FX from './fx.js?v=2';
 export function mkActs(W, atlas) {
   const C = W.C, SF = C.sf, BK = C.bk, ON = C.on, BU = C.bu, ST = C.st, P1 = C.p1, P2 = C.p2, TRI = [SF, BK, ON];
   const D = (V, f) => V.q.push(f);
@@ -21,7 +21,7 @@ export function mkActs(W, atlas) {
   function flashT(V, t, t0, d = .25, col = '#fff', a = .9) { if (t < t0 || t > t0 + d) return; D(V, () => FX.flash(V.g, V.w, V.h, a * (1 - (t - t0) / d), col)); }
   function dark(V, a, col = '#000') { if (a <= 0) return; D(V, () => FX.flash(V.g, V.w, V.h, a, col)); }
   function bars(V, k = 1) { D(V, () => { const g = V.g, b = V.h * .055 * k; g.fillStyle = '#000'; g.fillRect(0, 0, V.w, b); g.fillRect(0, V.h - b, V.w, b); }); }
-  function hud(V) { D(V, () => { const g = V.g, u = V.u, y = V.h - u * 46; const tw = FX.handRow(g, atlas, HANDS[0], V.w / 2, y, Math.min(V.w * .95, u * 430), { maxT: u * 34 }); FX.pill(g, V.T('hudYou') + '　' + V.T('hudWait'), V.w / 2, y - tw * .92 - u * 8, FX.fit(g, V.T('hudYou') + '　' + V.T('hudWait'), u * 12.5, V.w * .86), 'rgba(10,14,30,.8)', '#ffe9a8'); }); }
+  function hud(V) { D(V, () => { const g = V.g, u = V.u, y = V.h - u * 58; const tw = FX.handRow(g, atlas, HANDS[0], V.w / 2, y, Math.min(V.w * .95, u * 430), { maxT: u * 34 }); FX.pill(g, V.T('hudYou') + '　' + V.T('hudWait'), V.w / 2, y - tw * .92 - u * 8, FX.fit(g, V.T('hudYou') + '　' + V.T('hudWait'), u * 12.5, V.w * .86), 'rgba(10,14,30,.8)', '#ffe9a8'); }); }
   function tags(V, sc) { D(V, () => { const g = V.g, u = V.u; const put = (c, s, col) => { if (!c.g.visible) return; const p = hpos(c, -.34); FX.pill(g, s, cl(p.x, u * 62, V.w - u * 62), Math.max(u * 16, p.y), u * 11.5, 'rgba(10,14,30,.82)', col); }; put(BU, V.T('nBu') + ' ' + num(sc == null ? 25000 : sc), sc < 0 ? '#ff7a6a' : '#fff'); put(BK, V.T('nBk') + '：' + V.T('y2'), '#ffd84a'); put(ON, V.T('nOn') + '：' + V.T('y3'), '#ffd84a'); }); }
   const idle = t => W.seatC.forEach((c, i) => { c.by = Math.sin(t * 1.7 + i * 1.3) * .004; if (((t * .31 + i * .27) % 1) < .035) c.ey = .12; });
   const draws = (a, b, c, d) => { W.setDraw(0, a); W.setDraw(1, b); W.setDraw(2, c); W.setDraw(3, d); };
@@ -39,7 +39,7 @@ export function mkActs(W, atlas) {
   const SEATP = [0, 1, 2, 3].map(i => sp(i, 0, 0, .9));
   // ロンのあと：3人の手があいて、点棒と部長の持ちものが散らばっている
   const whiteTo = (seat, k, from) => { const m = W.dr[3].m, a = from || m.position.clone(), b = sp(seat, 7.7 * TW, TY + TD / 2, .475 - TH * .5); m.position.lerpVectors(a, b, k); m.position.y += Math.sin(k * Math.PI) * .28; m.quaternion.slerp(W.dr[seat].qR, k); };
-  const spoils = () => { W.flySticks(1e3, 0, .02); const P = W.props; P.wallet.visible = P.watch.visible = P.wig.visible = P.iou.visible = true; P.wallet.position.copy(sp(0, -.2, TY + .03, .36)); P.wallet.rotation.set(Math.PI / 2, 0, .4); P.watch.position.copy(sp(1, .1, TY + .02, .36)); P.watch.rotation.set(Math.PI / 2, 0, 0); P.wig.position.copy(sp(2, -.22, TY + .0, .34)); P.wig.rotation.set(0, 0, 0); P.iou.position.copy(sp(2, .18, TY + .012, .33)); P.iou.rotation.set(-Math.PI / 2, 0, .3); };
+  const spoils = () => { W.flySticks(1e3, 0, .02); const P = W.props; P.wallet.visible = P.watch.visible = P.wig.visible = P.iou.visible = P.jacket.visible = true; P.jacket.position.copy(sp(1, -.2, TY + .05, .33)); P.jacket.rotation.set(0, .6, 0); P.wallet.position.copy(sp(0, -.2, TY + .03, .36)); P.wallet.rotation.set(Math.PI / 2, 0, .4); P.watch.position.copy(sp(1, .1, TY + .02, .36)); P.watch.rotation.set(Math.PI / 2, 0, 0); P.wig.position.copy(sp(2, -.22, TY + .0, .34)); P.wig.rotation.set(0, 0, 0); P.iou.position.copy(sp(2, .18, TY + .012, .33)); P.iou.rotation.set(-Math.PI / 2, 0, .3); };
   const postRon = () => { draws(1, 1, 1, 1); for (const i of [0, 1, 2]) W.reveal(i, 1); whiteTo(2, 1); spoils(); BU.g.visible = false; W.chairs[3].rotation.x = -1.35; };
   // 役満の名乗り（1人ぶん 2.55秒）
   function yaku(V, t, t0, seat, nk, ck, yk, pts, oya, prev) {
@@ -110,7 +110,7 @@ export function mkActs(W, atlas) {
           const k = K(t, 10.55, 15.2); cam(V, t, mix([1.6, 2.4, 2.3], [1.0, 1.95, 1.85], ez(k)), [-.25, .92, 0], 1.12, 1.0);
           W.flySticks(t, 11.0, .022); const P = W.props, ch = BU.g.position.clone().add(V3(.2, 1.0, 0));
           W.arc(P.wallet, t, 12.4, .6, ch, sp(0, -.2, TY + .03, .36), .7); W.arc(P.watch, t, 12.9, .6, ch, sp(1, .1, TY + .02, .36), .7);
-          const wk = W.arc(P.wig, t, 13.4, .7, BU.g.position.clone().add(V3(0, 1.4, 0)), sp(2, -.22, TY, .34), .9, 5); if (t >= 13.4) BU.wig.visible = false; W.arc(P.iou, t, 14.0, .6, ch, sp(2, .18, TY + .012, .33), .6, 4);
+          const wk = W.arc(P.wig, t, 13.4, .7, BU.g.position.clone().add(V3(0, 1.4, 0)), sp(2, -.22, TY, .34), .9, 5); if (t >= 13.4) BU.wig.visible = false; W.arc(P.iou, t, 14.0, .6, ch, sp(2, .18, TY + .012, .33), .6, 4); W.arc(P.jacket, t, 13.75, .65, BU.g.position.clone().add(V3(0, .85, 0)), sp(1, -.2, TY + .05, .33), .8, 6);
           const sc = Math.round(lerp(25000, -135000, ez(K(t, 11.0, 14.6))) / 100) * 100; shock(BU, 1); BU.wh = ez(K(t, 12.2, 14.6)); BU.hp = -.3 * K(t, 13, 14.6); BU.hL.y += Math.sin(t * 18) * .04; BU.hR.set(.22, 1.05 + Math.sin(t * 16) * .06, .38);
           TRI.forEach((c, i) => { smile(c, 1); c.hL.set(-.2, .95 + Math.abs(Math.sin(t * 7 + i)) * .12, .34); c.hR.set(.2, .95 + Math.abs(Math.cos(t * 7 + i)) * .12, .34); });
           D(V, () => { const g = V.g, u = V.u, p = hpos(BU, .32); const s = num(sc); const px = u * (30 + (sc < 0 ? 8 : 0)); FX.txt(g, s, cl(p.x, u * 90, V.w - u * 90) + (sc < 0 ? Math.sin(t * 50) * u * 2 : 0), Math.max(u * 40, p.y), px, sc < 0 ? '#ff4a3a' : '#fff', '#16192e', px * .26); if (t >= 13.4 && t < 14.6) { const q = hpos(BU, .16); FX.mark(g, 'spark', q.x - u * 16, q.y, u * 26 * (1 + .3 * Math.sin(t * 20)), t); FX.mark(g, 'spark', q.x + u * 14, q.y - u * 10, u * 16, t); } if (t >= 14.4) { const q = hpos(BU, .25 + (t - 14.4) * .5); g.globalAlpha = cl(1.6 - (t - 14.4) * 1.6); FX.mark(g, 'soul', q.x + u * 10, q.y, u * 34, t); g.globalAlpha = 1; } });

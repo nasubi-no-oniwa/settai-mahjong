@@ -1,5 +1,6 @@
 // 接待麻雀：画面の上に重ねる2Dの絵（文字・吹き出し・手牌・ハンコなど）。動画にも同じものを描く
-import { CW, CH, cl, eo, eb, ez, hash } from './world.js?v=1';
+import { CW, CH, cl, eo, eb, ez, hash } from './world.js?v=2';
+if (typeof CanvasRenderingContext2D !== 'undefined' && !CanvasRenderingContext2D.prototype.roundRect) CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) { r = Math.max(0, Math.min(typeof r === 'number' ? r : (r && r[0]) || 0, Math.abs(w) / 2, Math.abs(h) / 2)); this.moveTo(x + r, y); this.arcTo(x + w, y, x + w, y + h, r); this.arcTo(x + w, y + h, x, y + h, r); this.arcTo(x, y + h, x, y, r); this.arcTo(x, y, x + w, y, r); this.closePath(); return this; };
 export const FONT = '"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic","Noto Sans CJK JP","Noto Sans JP","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif';
 export const SERIF = '"Hiragino Mincho ProN","Yu Mincho","Noto Serif CJK JP","Noto Serif JP","Songti TC","AppleMyungjo",serif';
 export const F = (px, fam = FONT, w = 900) => `${w} ${Math.max(4, Math.round(px))}px ${fam}`;
@@ -16,7 +17,7 @@ export function slam(g, dt, s, x, y, px, fill, stroke, o = {}) {
 export function rays(g, cx, cy, r, t, col, a = 1, n = 16) { g.save(); g.translate(cx, cy); g.rotate(t * .5); g.globalAlpha = a; g.fillStyle = col; for (let i = 0; i < n; i++) { g.rotate(Math.PI * 2 / n); g.beginPath(); g.moveTo(0, 0); g.lineTo(r, -r * .1); g.lineTo(r, r * .1); g.closePath(); g.fill(); } g.restore(); }
 export function band(g, w, y, h, col, k) { const e = eo(k); g.fillStyle = col; g.fillRect(0, y - h / 2 * e, w, h * e); }
 export function flash(g, w, h, a, col = '#fff') { if (a <= 0) return; g.save(); g.globalAlpha = cl(a); g.fillStyle = col; g.fillRect(0, 0, w, h); g.restore(); }
-function wrap(g, s, maxW) { const out = []; for (const para of String(s).split('\n')) { let line = ''; const words = /[ ]/.test(para) && !/[぀-ヿ一-鿿]/.test(para) ? para.split(/(?<= )/) : [...para]; for (const ch of words) { if (g.measureText(line + ch).width > maxW && line) { out.push(line); line = ch.trimStart(); } else line += ch; } out.push(line); } return out; }
+function wrap(g, s, maxW) { const out = []; for (const para of String(s).split('\n')) { let line = ''; const words = /[ ]/.test(para) && !/[぀-ヿ一-鿿]/.test(para) ? para.split(' ').map((w, i, a) => i < a.length - 1 ? w + ' ' : w) : [...para]; for (const ch of words) { if (g.measureText(line + ch).width > maxW && line) { out.push(line); line = ch.trimStart(); } else line += ch; } out.push(line); } return out; }
 // 吹き出し（o.think：心の声、o.dir：しっぽの向き 1＝下、-1＝上）
 export function bubble(g, x, y, s, px, o = {}) {
   const k = o.k == null ? 1 : o.k; if (k <= 0) return; g.save(); g.font = F(px); const lines = wrap(g, s, o.maxW || px * 11), lw = Math.max(...lines.map(l => g.measureText(l).width)), w = lw + px * 1.3, h = lines.length * px * 1.3 + px * .7, dir = o.dir || 1;

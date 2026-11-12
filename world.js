@@ -239,7 +239,7 @@ export function mkWorld(atlas) {
     wallet: box(.11, .07, .025, M(0x6b3a1e), 0, -9, 0), watch: (() => { const m = new THREE.Mesh(new THREE.TorusGeometry(.035, .012, 8, 16), M(0xe9c24a, .25)); SC.add(m); return m; })(),
     wig: (() => { const m = new THREE.Mesh(new THREE.SphereGeometry(.163, 20, 12, 0, Math.PI * 2, 0, Math.PI * .5), M(0x1c1c1c, .7)); SC.add(m); return m; })(),
     iou: (() => { const cv = document.createElement('canvas'); cv.width = 128; cv.height = 180; const g = cv.getContext('2d'); g.fillStyle = '#fffdf2'; g.fillRect(0, 0, 128, 180); g.fillStyle = '#222'; g.font = '900 40px serif'; g.textAlign = 'center'; '借用書'.split('').forEach((s, i) => g.fillText(s, 64, 52 + i * 46)); const tx = new THREE.CanvasTexture(cv); tx.colorSpace = THREE.SRGBColorSpace; const m = new THREE.Mesh(new THREE.PlaneGeometry(.12, .17), new THREE.MeshBasicMaterial({ map: tx, side: THREE.DoubleSide })); SC.add(m); return m; })(),
-    hanky: box(.1, .1, .004, new THREE.MeshBasicMaterial({ color: 0xffffff }), 0, -9, 0)
+    hanky: box(.1, .1, .004, new THREE.MeshBasicMaterial({ color: 0xffffff }), 0, -9, 0), jacket: box(.3, .08, .26, M(0x5d6470), 0, -9, 0)
   };
   W.arc = (m, t, t0, dur, a, b, h, spin = 8) => { const u = (t - t0) / dur; if (u <= 0) { m.visible = false; return 0; } const k = cl(u); m.visible = true; m.position.lerpVectors(a, b, k); m.position.y += Math.sin(k * Math.PI) * h; m.rotation.set(k < 1 ? t * spin : 0, k < 1 ? t * spin * .7 : 0, 0); return k; };
 

@@ -1,9 +1,9 @@
 // 接待麻雀：流れ（タイトル→ムービー→迷う3秒→ロンの5秒→エンド→結果）・操作・通信・動画
-import { mkWorld, mkAtlas, THREE, K, cl, ez, eo, eb, lerp, V3, HANDS } from './world.js?v=1';
-import * as FX from './fx.js?v=1';
-import { audio, ctx as actx, out as aout, S as SND, runSfx, UI, now as anow } from './snd.js?v=1';
-import { TX, LANGS, RANK, RCOL } from './tx.js?v=1';
-import { mkActs } from './acts.js?v=1';
+import { mkWorld, mkAtlas, THREE, K, cl, ez, eo, eb, lerp, V3, HANDS } from './world.js?v=2';
+import * as FX from './fx.js?v=2';
+import { audio, ctx as actx, out as aout, S as SND, runSfx, UI, now as anow } from './snd.js?v=2';
+import { TX, LANGS, RANK, RCOL } from './tx.js?v=2';
+import { mkActs } from './acts.js?v=2';
 const $ = id => document.getElementById(id);
 const Q = new URLSearchParams(location.search);
 const TEST = Q.has('test'), STEP = Q.has('step'), OGP = Q.has('ogp'), ICON = Q.has('icon'), HOME = Q.has('homeimg');
@@ -239,13 +239,13 @@ async function boot() {
 // リンクの画像・アイコン・なすびのお庭の画像（?ogp / ?icon / ?homeimg）
 function still() {
   show(null); mode = 'ogp'; const w = V.w, h = V.h, land = w > h;
-  const sc = { len: 1, sfx: [], run(tt, VV) { A.dec.run(1.2, VV); VV.q.length = 0; W.setCam(ICON ? [.9, 1.9, 1.5] : land ? [1.9, 2.2, 2.3] : [1.2, 2.5, 2.6], ICON ? [-.3, .95, 0] : [-.1, .9, -.1], ICON ? .62 : land ? 1.5 : 1.0, ICON ? .62 : land ? .8 : 1.2, 0); } };
+  const sc = { len: 1, sfx: [], run(tt, VV) { A.dec.run(1.2, VV); VV.q.length = 0; W.setCam(ICON ? [.9, 1.9, 1.5] : land ? [1.5, 2.0, 1.9] : [1.2, 2.5, 2.6], ICON ? [-.3, .95, 0] : land ? [.75, .95, -.1] : [-.1, .9, -.1], ICON ? .62 : land ? 1.5 : 1.0, ICON ? .62 : land ? .8 : 1.2, 0); } };
   paint(sc, 0, V, VV => VV.q.push(() => {
     const g = VV.g, u = Math.min(w, h) / 630; if (ICON) { FX.tile(g, atlas, 31, w * .5, h * .46, w * .34, { glow: '#ff4a3a' }); FX.txt(g, t('ron') + '！', w * .5, h * .84, w * .2, '#ff3b30', '#fff', w * .045); return; }
-    const gr = g.createLinearGradient(0, 0, land ? w * .62 : 0, land ? 0 : h * .5); gr.addColorStop(0, 'rgba(10,6,4,.92)'); gr.addColorStop(1, 'rgba(10,6,4,0)'); g.fillStyle = gr; g.fillRect(0, 0, w, h);
-    const x = land ? w * .06 : w * .5, al = land ? 'left' : 'center'; FX.txt(g, t('title'), x, h * (land ? .2 : .1), u * (land ? 108 : 86), '#ffe27a', '#5a1a00', u * 16, FX.SERIF, al);
+    const gr = g.createLinearGradient(land ? w : 0, 0, land ? w * .36 : 0, land ? 0 : h * .5); gr.addColorStop(0, 'rgba(10,6,4,.94)'); gr.addColorStop(.55, 'rgba(10,6,4,.8)'); gr.addColorStop(1, 'rgba(10,6,4,0)'); g.fillStyle = gr; g.fillRect(0, 0, w, h);
+    const x = land ? w * .95 : w * .5, al = land ? 'right' : 'center'; FX.txt(g, t('title'), x, h * (land ? .2 : .1), u * (land ? 108 : 86), '#ffe27a', '#5a1a00', u * 16, FX.SERIF, al);
     FX.txt(g, t('ogp1'), x, h * (land ? .43 : .2), u * (land ? 38 : 30), '#fff', '#16192e', u * 8, null, al); FX.txt(g, t('ogp2'), x, h * (land ? .55 : .25), u * (land ? 38 : 30), '#ffd84a', '#16192e', u * 8, null, al);
-    if (!HOME) { FX.handRow(g, atlas, HANDS[0], land ? w * .3 : w * .5, h * (land ? .76 : .9), land ? w * .52 : w * .92, { win: 31 }); FX.txt(g, t('ogp3'), land ? w * .06 : w * .5, h * (land ? .92 : .96), u * 26, '#fff', '#c4201c', u * 7, null, al); }
+    if (!HOME) { FX.handRow(g, atlas, HANDS[0], land ? w * .69 : w * .5, h * (land ? .76 : .9), land ? w * .52 : w * .92, { win: 31 }); FX.txt(g, t('ogp3'), land ? w * .95 : w * .5, h * (land ? .92 : .96), u * 26, '#fff', '#c4201c', u * 7, null, al); }
     const p = W.pj(W.dr[3].m.position); FX.tile(g, atlas, 31, p.x, p.y - u * 50, u * 70, { glow: '#ff4a3a' });
   })); drawFx(V); window.__READY = true;
 }
