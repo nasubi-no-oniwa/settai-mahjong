@@ -1,6 +1,7 @@
 // 接待麻雀：ことば（日本語・英語・繁体字・韓国語）
 export const LANGS = [['ja', '日本語'], ['en', 'English'], ['zh', '繁中'], ['ko', '한국어']];
 export const RANK = ['C', 'SS', 'C', 'B', 'A', 'A', 'A', 'A', 'S', 'C', 'C'];   // エンドごとのランク
+export const ORDER = [1, 8, 4, 5, 6, 7, 3, 0, 2, 9, 10];                           // 一覧に出す順（SS → S → A → B → C）
 export const RCOL = { SS: '#ff3ea5', S: '#ffb300', A: '#ff5a36', B: '#2f8fe8', C: '#6b7280' };
 export const TX = {
 ja: {

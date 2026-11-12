@@ -1,6 +1,6 @@
 // 接待麻雀：場面（はじめのムービー・迷う3秒・ロンの5秒・それぞれのエンド）。どれも「場面が始まってからの秒 t」だけで絵が決まる
-import { TW, TH, TD, TY, cl, K, ez, eo, ei, eb, lerp, hash, V3, sp, HANDS } from './world.js?v=6';
-import * as FX from './fx.js?v=6';
+import { TW, TH, TD, TY, cl, K, ez, eo, ei, eb, lerp, hash, V3, sp, HANDS } from './world.js?v=7';
+import * as FX from './fx.js?v=7';
 export function mkActs(W, atlas) {
   const C = W.C, SF = C.sf, BK = C.bk, ON = C.on, BU = C.bu, ST = C.st, P1 = C.p1, P2 = C.p2, TRI = [SF, BK, ON];
   const D = (V, f) => V.q.push(f);

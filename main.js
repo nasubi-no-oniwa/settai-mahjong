@@ -1,9 +1,9 @@
 // 接待麻雀：流れ（タイトル→ムービー→迷う3秒→ロンの5秒→エンド→結果）・操作・通信・動画
-import { mkWorld, mkAtlas, THREE, K, cl, ez, eo, eb, lerp, V3, HANDS } from './world.js?v=6';
-import * as FX from './fx.js?v=6';
-import { audio, ctx as actx, out as aout, S as SND, runSfx, UI, now as anow } from './snd.js?v=6';
-import { TX, LANGS, RANK, RCOL } from './tx.js?v=6';
-import { mkActs } from './acts.js?v=6';
+import { mkWorld, mkAtlas, THREE, K, cl, ez, eo, eb, lerp, V3, HANDS } from './world.js?v=7';
+import * as FX from './fx.js?v=7';
+import { audio, ctx as actx, out as aout, S as SND, runSfx, UI, now as anow } from './snd.js?v=7';
+import { TX, LANGS, RANK, RCOL, ORDER } from './tx.js?v=7';
+import { mkActs } from './acts.js?v=7';
 const $ = id => document.getElementById(id);
 const Q = new URLSearchParams(location.search);
 const TEST = Q.has('test'), STEP = Q.has('step'), OGP = Q.has('ogp'), ICON = Q.has('icon'), HOME = Q.has('homeimg');
@@ -184,7 +184,7 @@ $('vidBtn').onclick = () => makeVideo(); $('vX').onclick = () => openX(postText(
 let zFrom = 'title';
 async function openList() {
   show('zPanel'); const box = $('zBox'), n = nFound(); $('zNotice').hidden = Date.now() >= HIDE; $('zNotice').textContent = t('notice'); $('zFound').textContent = t('found', { n }); $('zNote').textContent = ''; $('zGod').hidden = n < NE;
-  const rows = v => '<table class="zk">' + RANK.map((r, i) => { const own = !!S.got[i]; return '<tr class="' + (own ? 'own' : 'no') + '"><td class="ck">' + (own ? '✓' : '') + '</td><td style="width:44px"><span class="rk" style="background:' + RCOL[r] + ';font-size:13px;min-width:30px;text-align:center">' + r + '</span></td><td class="n">' + esc(own ? t('en')[i] : t('lHid')) + '</td><td class="c">' + (v ? esc(t('lPeople', { n: (v['e' + i] || 0).toLocaleString() })) : '…') + '</td></tr>'; }).join('')
+  const rows = v => '<table class="zk">' + ORDER.map(i => { const r = RANK[i], own = !!S.got[i]; return '<tr class="' + (own ? 'own' : 'no') + '"><td class="ck">' + (own ? '✓' : '') + '</td><td style="width:44px"><span class="rk" style="background:' + RCOL[r] + ';font-size:13px;min-width:30px;text-align:center">' + r + '</span></td><td class="n">' + esc(own ? t('en')[i] : t('lHid')) + '</td><td class="c">' + (v ? esc(t('lPeople', { n: (v['e' + i] || 0).toLocaleString() })) : '…') + '</td></tr>'; }).join('')
     + (n >= NE ? '<tr class="god"><td class="ck">👑</td><td colspan="2">' + esc(t('lGod')) + '<br><small>' + esc(t('lGodNote')) + '</small></td><td class="c">' + (v ? esc(t('lPeople', { n: (v.comp || 0).toLocaleString() })) : '…') + '</td></tr>' : '') + '</table>';
   box.innerHTML = rows(null); try { const v = await counts(); box.innerHTML = rows(v); } catch (e) { $('zNote').textContent = t('lErr'); }
 }
