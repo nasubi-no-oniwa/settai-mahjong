@@ -4,7 +4,7 @@ export const RANK = ['C', 'SS', 'C', 'B', 'A', 'A', 'A', 'A', 'S', 'C', 'C'];   
 export const RCOL = { SS: '#ff3ea5', S: '#ffb300', A: '#ff5a36', B: '#2f8fe8', C: '#6b7280' };
 export const TX = {
 ja: {
- title: '接待麻雀', sub: '部長が、海底で白を切る。', how: '最後のツモで、部長が白を切る。その白で、自分も部下も女同僚も役満。さあ、どうする？\nエンドは全部で11種類。', start: '卓につく', list: 'エンド一覧', hikitsugi: '引き継ぎコード', notice: '11/13 20:00 にリプ欄で回答発表', found: '見つけたエンド {n}/11',
+ title: '接待麻雀', sub: '部長が、海底で白を切る。', how: '最後のツモで、部長が白を切る。その白で、自分も部下も女同僚も役満。さあ、どうする？\n画面のあちこちを、タップ・長押し・スライドしてみよう。エンドは全部で11種類。', start: '卓につく', list: 'エンド一覧', hikitsugi: '引き継ぎコード', notice: '11/13 20:00 にリプ欄で回答発表', found: '見つけたエンド {n}/11',
  tobi: 'トビ！', items: ['財布', '腕時計', 'カツラ', '上着', '借用書'],
  stP: '見つけた人', stG: '見つけたエンド',
  skip: 'スキップ ▶▶', ron: 'ロン', owaru: '終わる', again: 'もう一回', vid: '動画にする', xpost: 'Xに投稿', top: 'タイトルへ', back: 'もどる',
@@ -32,7 +32,7 @@ ja: {
  ogp1: '部長が、海底で白を切る。', ogp2: 'その白、3人とも役満。', ogp3: 'エンドは11種類'
 },
 en: {
- title: 'Settai Mahjong', sub: 'The boss discards the White Dragon on the last tile.', how: 'On the very last draw, your boss discards the White Dragon. With it, you, your junior and your coworker all have a yakuman. So… what do you do?\n11 endings in all.', start: 'Sit at the table', list: 'Endings', hikitsugi: 'Transfer code', notice: 'Answers in the replies: Nov 13, 20:00 JST', found: 'Endings found {n}/11',
+ title: 'Settai Mahjong', sub: 'The boss discards the White Dragon on the last tile.', how: 'On the very last draw, your boss discards the White Dragon. With it, you, your junior and your coworker all have a yakuman. So… what do you do?\nTry tapping, holding and swiping things on the screen. 11 endings in all.', start: 'Sit at the table', list: 'Endings', hikitsugi: 'Transfer code', notice: 'Answers in the replies: Nov 13, 20:00 JST', found: 'Endings found {n}/11',
  tobi: 'BUSTED!', items: ['Wallet', 'Watch', 'Toupee', 'Jacket', 'IOU'],
  stP: 'Found by', stG: 'Endings found',
  skip: 'Skip ▶▶', ron: 'RON', owaru: 'End', again: 'Again', vid: 'Make a video', xpost: 'Post to X', top: 'Title', back: 'Back',
@@ -60,7 +60,7 @@ en: {
  ogp1: 'The boss discards the White.', ogp2: 'All three have a yakuman.', ogp3: '11 endings'
 },
 zh: {
- title: '接待麻雀', sub: '部長在海底打出了白板。', how: '最後一張牌，部長打出白板。這張白板，你、部下、女同事全都役滿。那麼，該怎麼辦？\n結局共有11種。', start: '入座', list: '結局一覽', hikitsugi: '繼承碼', notice: '11/13 20:00（日本時間）在回覆區公布答案', found: '已發現結局 {n}/11',
+ title: '接待麻雀', sub: '部長在海底打出了白板。', how: '最後一張牌，部長打出白板。這張白板，你、部下、女同事全都役滿。那麼，該怎麼辦？\n試著點一下、長按、滑動畫面上的各種東西吧。結局共有11種。', start: '入座', list: '結局一覽', hikitsugi: '繼承碼', notice: '11/13 20:00（日本時間）在回覆區公布答案', found: '已發現結局 {n}/11',
  tobi: '被飛！', items: ['錢包', '手錶', '假髮', '外套', '借據'],
  stP: '發現的人', stG: '已發現結局',
  skip: '跳過 ▶▶', ron: '榮', owaru: '結束', again: '再一次', vid: '做成影片', xpost: '發到 X', top: '回標題', back: '返回',
@@ -88,7 +88,7 @@ zh: {
  ogp1: '部長在海底打出了白板。', ogp2: '那張白板，三人都役滿。', ogp3: '結局共11種'
 },
 ko: {
- title: '접대 마작', sub: '부장이 마지막 패로 백을 버린다.', how: '마지막 쯔모에서 부장이 백을 버린다. 그 백으로 나도, 부하도, 여자 동료도 역만. 자, 어떻게 할까?\n엔딩은 모두 11가지.', start: '자리에 앉기', list: '엔딩 목록', hikitsugi: '이어하기 코드', notice: '11/13 20:00(일본 시간) 답글에서 정답 발표', found: '찾은 엔딩 {n}/11',
+ title: '접대 마작', sub: '부장이 마지막 패로 백을 버린다.', how: '마지막 쯔모에서 부장이 백을 버린다. 그 백으로 나도, 부하도, 여자 동료도 역만. 자, 어떻게 할까?\n화면 여기저기를 탭하고, 길게 누르고, 밀어 보자. 엔딩은 모두 11가지.', start: '자리에 앉기', list: '엔딩 목록', hikitsugi: '이어하기 코드', notice: '11/13 20:00(일본 시간) 답글에서 정답 발표', found: '찾은 엔딩 {n}/11',
  tobi: '토비!', items: ['지갑', '시계', '가발', '겉옷', '차용증'],
  stP: '찾은 사람', stG: '찾은 엔딩',
  skip: '건너뛰기 ▶▶', ron: '론', owaru: '끝내기', again: '한 번 더', vid: '영상으로 만들기', xpost: 'X에 올리기', top: '타이틀로', back: '돌아가기',

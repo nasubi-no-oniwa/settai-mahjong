@@ -1,6 +1,6 @@
 // 接待麻雀：場面（はじめのムービー・迷う3秒・ロンの5秒・それぞれのエンド）。どれも「場面が始まってからの秒 t」だけで絵が決まる
-import { TW, TH, TD, TY, cl, K, ez, eo, ei, eb, lerp, hash, V3, sp, HANDS } from './world.js?v=5';
-import * as FX from './fx.js?v=5';
+import { TW, TH, TD, TY, cl, K, ez, eo, ei, eb, lerp, hash, V3, sp, HANDS } from './world.js?v=6';
+import * as FX from './fx.js?v=6';
 export function mkActs(W, atlas) {
   const C = W.C, SF = C.sf, BK = C.bk, ON = C.on, BU = C.bu, ST = C.st, P1 = C.p1, P2 = C.p2, TRI = [SF, BK, ON];
   const D = (V, f) => V.q.push(f);
@@ -129,12 +129,12 @@ export function mkActs(W, atlas) {
           const out = ez(K(t, 21.15, 21.4)); W.door.rotation.y = -1.75 * (1 - ez(K(t, 21.2, 21.42))); BU.g.position.set(-1.3, 0, -1.9 - out * .9); BU.g.rotation.y = 0; BU.st = 1; angry(BU, 1, t); BU.ln = .15; BU.hR.set(.12, 1.42, .55); W.cry(BU, t, .6); BU.g.visible = out < 1;
           ST.g.visible = out < 1; ST.g.position.set(-1.3, 0, -2.5 - out * .5); ST.g.rotation.y = 0; ST.reach('L', BU.g.position.clone().add(V3(-.12, 1.15, -.1)), 1); ST.reach('R', BU.g.position.clone().add(V3(.12, 1.15, -.1)), 1);
           if (out < 1) { mk(V, 'anger', BU, -40, -10, 30, t); } slamT(V, t, 20.0, 'bu_fire', .5, .2, 54, '#ff3b30', '#fff', { hold: 1.5, jit: V.u * 1.5, sw: .3 }); W.shake = t > 21.4 ? .03 * (1 - K(t, 21.4, 21.8)) : t > 20 && t < 20.4 ? .015 : 0; flashT(V, t, 20.0, .2, '#ff3b30', .4); }
-        else { camDV(V, t); postRon(); TRI.forEach((c, i) => { say(V, t, 22.0 + i * .15, 99, c, 'dots', { px: 14 }); c.hy = [-.5, .9, .5][i] * 0 + 0; c.es = 1.1; }); hud(V); }
+        else { camDV(V, t); postRon(); TRI.forEach((c, i) => { say(V, t, 22.0 + i * .15, 99, c, 'dots', { px: 14 }); c.es = 1.1; }); }
       }
     };
   }
   // ===== 「終わる」を押さずに待つ（wt：待った秒） =====
-  A.wait = { len: 1e9, sfx: [], run(t, V) { idle(t); camDV(V, t); postRon(); if (t > 32) { const r = cl((t - 32) / 22); if (Math.floor(t * .5) % 3 === 0) W.door.rotation.y = -Math.abs(Math.sin(t * 31)) * .03 * r; if (t > 38 && t <= 50 && (t % 5) < 1.3) TRI.forEach(c => { c.hy = c === SF ? .7 : c === BK ? .2 : -.5; c.es = 1.1; }); } TRI.forEach((c, i) => { if (((t + i * 2) % 7) < 3) say(V, t, 0, 1e9, c, 'dots', { px: 14 }); c.hp = .12; }); if (t > 50) { W.dglass.material.color.set(Math.floor(t * 3) % 2 ? 0xff5a5a : 0x5a7aff); nerv(t, K(t, 50, 53)); TRI.forEach(c => { c.hy = c === SF ? .7 : c === BK ? 0 : -.5; }); } hud(V); } };
+  A.wait = { len: 1e9, sfx: [], run(t, V) { idle(t); camDV(V, t); postRon(); if (t > 32) { const r = cl((t - 32) / 22); if (Math.floor(t * .5) % 3 === 0) W.door.rotation.y = -Math.abs(Math.sin(t * 31)) * .03 * r; if (t > 38 && t <= 50 && (t % 5) < 1.3) TRI.forEach(c => { c.hy = c === SF ? .7 : c === BK ? .2 : -.5; c.es = 1.1; }); } TRI.forEach((c, i) => { if (((t + i * 2) % 7) < 3) say(V, t, 0, 1e9, c, 'dots', { px: 14 }); c.hp = .12; }); if (t > 50) { W.dglass.material.color.set(Math.floor(t * 3) % 2 ? 0xff5a5a : 0x5a7aff); nerv(t, K(t, 50, 53)); TRI.forEach(c => { c.hy = c === SF ? .7 : c === BK ? 0 : -.5; }); } } };
   // ===== 逮捕（プレミアム） =====
   A.arrest = {
     len: 11.6, clip: [0, 11.4],
