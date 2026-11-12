@@ -1,6 +1,6 @@
 // 接待麻雀：場面（はじめのムービー・迷う3秒・ロンの5秒・それぞれのエンド）。どれも「場面が始まってからの秒 t」だけで絵が決まる
-import { TW, TH, TD, TY, cl, K, ez, eo, ei, eb, lerp, hash, V3, sp, HANDS } from './world.js?v=7';
-import * as FX from './fx.js?v=7';
+import { TW, TH, TD, TY, cl, K, ez, eo, ei, eb, lerp, hash, V3, sp, HANDS } from './world.js?v=8';
+import * as FX from './fx.js?v=8';
 export function mkActs(W, atlas) {
   const C = W.C, SF = C.sf, BK = C.bk, ON = C.on, BU = C.bu, ST = C.st, P1 = C.p1, P2 = C.p2, TRI = [SF, BK, ON];
   const D = (V, f) => V.q.push(f);
@@ -40,7 +40,7 @@ export function mkActs(W, atlas) {
   // ロンのあと：3人の手があいて、点棒と部長の持ちものが散らばっている
   const whiteTo = (seat, k, from) => { const m = W.dr[3].m, a = from || m.position.clone(), b = sp(seat, 7.7 * TW, TY + TD / 2, .475 - TH * .5); m.position.lerpVectors(a, b, k); m.position.y += Math.sin(k * Math.PI) * .28; m.quaternion.slerp(W.dr[seat].qR, k); };
   const spoils = () => { W.flySticks(1e3, 0, .02); const P = W.props; P.wallet.visible = P.watch.visible = P.wig.visible = P.iou.visible = P.jacket.visible = true; P.jacket.position.copy(sp(1, -.2, TY + .05, .33)); P.jacket.rotation.set(0, .6, 0); P.wallet.position.copy(sp(0, -.2, TY + .03, .36)); P.wallet.rotation.set(Math.PI / 2, 0, .4); P.watch.position.copy(sp(1, .1, TY + .02, .36)); P.watch.rotation.set(Math.PI / 2, 0, 0); P.wig.position.copy(sp(2, -.22, TY + .0, .34)); P.wig.rotation.set(0, 0, 0); P.iou.position.copy(sp(2, .18, TY + .012, .33)); P.iou.rotation.set(-Math.PI / 2, 0, .3); };
-  const postRon = () => { draws(1, 1, 1, 1); for (const i of [0, 1, 2]) W.reveal(i, 1); whiteTo(2, 1); spoils(); BU.g.visible = false; W.chairs[3].rotation.x = -1.35; };
+  const postRon = () => { draws(1, 1, 1, 1); for (const i of [0, 1, 2]) W.reveal(i, 1); whiteTo(1, 1); spoils(); BU.g.visible = false; W.chairs[3].rotation.x = -1.35; };
   // 役満の名乗り（1人ぶん 2.55秒）
   function yaku(V, t, t0, seat, nk, ck, yk, pts, oya, prev) {
     const dt = t - t0; if (dt < 0 || dt >= 2.55) return; const c = W.seatC[seat], hc = sp(seat, 0, .93, .9), cp = sp(seat, .12, 1.42, -.42);
@@ -94,18 +94,18 @@ export function mkActs(W, atlas) {
   { const coins = []; for (let i = 0; i < 42; i++)coins.push([11.0 + i * .085, 'coin', 1 + (i % 8) * .05, .7]);
     A.ron = {
       len: 22.8, clip: [0, 22.2],
-      sfx: [[0, 'ron', 1], [.55, 'ron', 1.12], [1.1, 'ron', 1.26], [1.75, 'pop'], [2.15, 'slam', 1.2], [2.15, 'gong'], ...yakuSfx(2.9), ...yakuSfx(5.45), ...yakuSfx(8.0, 1.25), [9.0, 'chime'], ...coins, [11.9, 'buzz'], [11.9, 'slam', .9], [12.4, 'whoosh'], [12.9, 'whoosh'], [13.4, 'whoosh'], [13.5, 'pop'], [13.75, 'whoosh'], [14.0, 'whoosh'], [14.3, 'slam'], [14.7, 'sad'], [15.3, 'cry', 1.9], [15.5, 'thud', .6], [15.9, 'thud', .6], [16.3, 'thud', .6], [16.7, 'thud', .6], [17.5, 'door', .6], [17.7, 'step'], [17.95, 'step'], [18.2, 'step'], [18.7, 'cry', 1.0, .7], [19.0, 'step'], [19.3, 'step'], [19.6, 'step'], [20.0, 'slam', 1.3], [20.0, 'buzz'], [21.4, 'door', 1.4]],
+      sfx: [[0, 'ron', 1], [.55, 'ron', 1.12], [1.1, 'ron', 1.26], [1.75, 'pop'], [2.15, 'slam', 1.2], [2.15, 'gong'], ...yakuSfx(2.9), ...yakuSfx(5.45, 1.2), [6.45, 'chime'], ...yakuSfx(8.0, 1.25), ...coins, [11.9, 'buzz'], [11.9, 'slam', .9], [12.4, 'whoosh'], [12.9, 'whoosh'], [13.4, 'whoosh'], [13.5, 'pop'], [13.75, 'whoosh'], [14.0, 'whoosh'], [14.3, 'slam'], [14.7, 'sad'], [15.3, 'cry', 1.9], [15.5, 'thud', .6], [15.9, 'thud', .6], [16.3, 'thud', .6], [16.7, 'thud', .6], [17.5, 'door', .6], [17.7, 'step'], [17.95, 'step'], [18.2, 'step'], [18.7, 'cry', 1.0, .7], [19.0, 'step'], [19.3, 'step'], [19.6, 'step'], [20.0, 'slam', 1.3], [20.0, 'buzz'], [21.4, 'door', 1.4]],
       run(t, V) {
         idle(t); draws(1, 1, 1, 1); const up = 1 - K(t, 2.5, 2.9);
-        ronUp(SF, t, 0, up); ronUp(BK, t, .55, up); ronUp(ON, t, 1.1, up);
-        if (t >= 2.9) W.reveal(0, K(t, 2.95, 3.7)); if (t >= 5.45) W.reveal(1, K(t, 5.5, 6.25)); if (t >= 8.0) W.reveal(2, K(t, 8.05, 8.8));
-        if (t >= 5.45 && t < 8.0) whiteTo(0, 1); else if (t >= 8.0 && t < 10.55) whiteTo(1, 1); else if (t >= 10.55) whiteTo(2, 1);
+        ronUp(SF, t, 0, up); ronUp(ON, t, .55, up); ronUp(BK, t, 1.1, up);
+        if (t >= 2.9) W.reveal(0, K(t, 2.95, 3.7)); if (t >= 5.45) W.reveal(2, K(t, 5.5, 6.25)); if (t >= 8.0) W.reveal(1, K(t, 8.05, 8.8));
+        if (t >= 5.45 && t < 8.0) whiteTo(0, 1); else if (t >= 8.0 && t < 10.55) whiteTo(2, 1); else if (t >= 10.55) whiteTo(1, 1);
         if (t < 1.7) { camDV(V, t); W.shake = .03 * Math.max(0, 1 - ((t % .55) / .3)); shock(BU, K(t, .1, .3)); tags(V);
-          slamT(V, t, 0, 'ron', .5, .72, 110, '#ff3b30', '#fff', { hold: 1.7 }); slamT(V, t, .55, 'ron', .78, .46, 92, '#ffb300', '#fff', { hold: 1.15, rot: .12 }); slamT(V, t, 1.1, 'ron', .5, .2, 92, '#ff3ea5', '#fff', { hold: .6, rot: -.08 }); flashT(V, t, 0, .2); flashT(V, t, .55, .15); flashT(V, t, 1.1, .15); D(V, () => { const g = V.g; for (let i = 0; i < 3; i++) { const dt = t - i * .55; if (dt > 0 && dt < .5) { g.save(); g.strokeStyle = 'rgba(255,255,255,' + (1 - dt / .5) + ')'; g.lineWidth = V.u * 6; g.beginPath(); g.arc(V.w * [.5, .78, .5][i], V.h * [.72, .46, .2][i], dt * V.w * 1.6, 0, 7); g.stroke(); g.restore(); } } }); }
+          slamT(V, t, 0, 'ron', .5, .72, 110, '#ff3b30', '#fff', { hold: 1.7 }); slamT(V, t, .55, 'ron', .5, .2, 92, '#ff3ea5', '#fff', { hold: 1.15, rot: -.08 }); slamT(V, t, 1.1, 'ron', .78, .46, 92, '#ffb300', '#fff', { hold: .6, rot: .12 }); flashT(V, t, 0, .2); flashT(V, t, .55, .15); flashT(V, t, 1.1, .15); D(V, () => { const g = V.g; for (let i = 0; i < 3; i++) { const dt = t - i * .55; if (dt > 0 && dt < .5) { g.save(); g.strokeStyle = 'rgba(255,255,255,' + (1 - dt / .5) + ')'; g.lineWidth = V.u * 6; g.beginPath(); g.arc(V.w * [.5, .5, .78][i], V.h * [.72, .2, .46][i], dt * V.w * 1.6, 0, 7); g.stroke(); g.restore(); } } }); }
         else if (t < 2.9) { cam(V, t, [.25, 1.32, .38], [-.86, 1.16, 0], .42, .4); shock(BU, 1); BU.hy = Math.sin(t * 30) * .05; mk(V, 'sweat', BU, 46, 6, 22, t); say(V, t, 1.75, 2.9, BU, 'bu_e', { px: 22 }); W.shake = t > 2.15 ? .02 * (1 - K(t, 2.15, 2.6)) : 0; slamT(V, t, 2.15, 'tri', .5, .78, 64, '#fff', '#c4201c', { sh: '#ff3b30' }); flashT(V, t, 2.15, .3); }
         else if (t < 5.45) yaku(V, t, 2.9, 0, 'y1', 'y1c', 'yk', 32000, 0, W.dr[3].pR);
-        else if (t < 8.0) yaku(V, t, 5.45, 1, 'y2', 'y2c', 'yk', 32000, 0, sp(0, 7.7 * TW, TY + TD / 2, .475 - TH * .5));
-        else if (t < 10.55) { yaku(V, t, 8.0, 2, 'y3', 'y3c', 'yk2', 96000, 1, sp(1, 7.7 * TW, TY + TD / 2, .475 - TH * .5)); flashT(V, t, 9.0, .3, '#ffe27a', .6); }
+        else if (t < 8.0) { yaku(V, t, 5.45, 2, 'y3', 'y3c', 'yk2', 96000, 1, sp(0, 7.7 * TW, TY + TD / 2, .475 - TH * .5)); flashT(V, t, 6.45, .3, '#ffe27a', .6); }
+        else if (t < 10.55) yaku(V, t, 8.0, 1, 'y2', 'y2c', 'yk', 32000, 0, sp(2, 7.7 * TW, TY + TD / 2, .475 - TH * .5));
         else if (t < 15.2) { // 支払い：点棒が飛び、身ぐるみはがされる
           const k = K(t, 10.55, 15.2); cam(V, t, mix([1.6, 2.4, 2.3], [1.0, 1.95, 1.85], ez(k)), [-.25, .92, 0], 1.12, 1.0);
           W.flySticks(t, 11.0, .022); const P = W.props, ch = BU.g.position.clone().add(V3(.2, 1.0, 0));
@@ -161,10 +161,10 @@ export function mkActs(W, atlas) {
   A.e[2] = {
     len: 10, sfx: [[.2, 'ron', 1.12], [.7, 'ron', 1.26], [1.3, 'fan'], [1.3, 'slam'], [2.2, 'drum'], [3.3, 'cry', 1.2], [4.8, 'pop'], [7.2, 'slam', 1.2], [7.2, 'chime'], [8.6, 'slam'], [8.9, 'slam'], [8.9, 'buzz']],
     run(t, V) {
-      idle(t); draws(1, 1, 1, 1); const up = 1 - K(t, 1.1, 1.4); ronUp(BK, t, .2, up); ronUp(ON, t, .7, up); if (t > 1.3) { W.reveal(1, K(t, 1.3, 2)); W.reveal(2, K(t, 1.3, 2)); }
+      idle(t); draws(1, 1, 1, 1); const up = 1 - K(t, 1.1, 1.4); ronUp(ON, t, .2, up); ronUp(BK, t, .7, up); if (t > 1.3) { W.reveal(1, K(t, 1.3, 2)); W.reveal(2, K(t, 1.3, 2)); }
       const sc = Math.round(lerp(25000, -103000, ez(K(t, 1.6, 3.2))) / 100) * 100;
-      if (t < 1.3) { camDV(V, t); shock(BU, K(t, .2, .4)); nerv(t, 1, [SF]); slamT(V, t, .2, 'ron', .78, .46, 92, '#ffb300', '#fff', { hold: 1.1, rot: .12 }); slamT(V, t, .7, 'ron', .5, .2, 92, '#ff3ea5', '#fff', { hold: .6, rot: -.08 }); flashT(V, t, .2, .15); flashT(V, t, .7, .15); W.shake = .02; tags(V); hud(V); }
-      else if (t < 3.3) { cam(V, t, [1.3, 2.3, 2.0], [-.2, .9, 0], 1.1, 1.0); shock(BU, 1); W.flySticks(t, 1.6, .012, 120); D(V, () => { const g = V.g, w = V.w, h = V.h, u = V.u, dt = t - 1.3; FX.band(g, w, h * .2, u * 150, 'rgba(20,7,0,.7)', K(dt, 0, .2)); FX.slam(g, dt, V.T('y2'), w * .5, h * .155, u * 54, '#ffe27a', '#5a1a00', { fam: FX.SERIF, maxW: w * .9 }); FX.slam(g, dt - .25, V.T('y3'), w * .5, h * .245, u * 54, '#ffe27a', '#5a1a00', { fam: FX.SERIF, maxW: w * .9 }); const p = hpos(BU, .32); FX.txt(g, num(sc), cl(p.x, u * 90, w - u * 90), p.y, u * 34, sc < 0 ? '#ff4a3a' : '#fff', '#16192e', u * 9); }); }
+      if (t < 1.3) { camDV(V, t); shock(BU, K(t, .2, .4)); nerv(t, 1, [SF]); slamT(V, t, .2, 'ron', .5, .2, 92, '#ff3ea5', '#fff', { hold: 1.1, rot: -.08 }); slamT(V, t, .7, 'ron', .78, .46, 92, '#ffb300', '#fff', { hold: .6, rot: .12 }); flashT(V, t, .2, .15); flashT(V, t, .7, .15); W.shake = .02; tags(V); hud(V); }
+      else if (t < 3.3) { cam(V, t, [1.3, 2.3, 2.0], [-.2, .9, 0], 1.1, 1.0); shock(BU, 1); W.flySticks(t, 1.6, .012, 120); D(V, () => { const g = V.g, w = V.w, h = V.h, u = V.u, dt = t - 1.3; FX.band(g, w, h * .2, u * 150, 'rgba(20,7,0,.7)', K(dt, 0, .2)); FX.slam(g, dt, V.T('y3'), w * .5, h * .155, u * 54, '#ffe27a', '#5a1a00', { fam: FX.SERIF, maxW: w * .9 }); FX.slam(g, dt - .25, V.T('y2'), w * .5, h * .245, u * 54, '#ffe27a', '#5a1a00', { fam: FX.SERIF, maxW: w * .9 }); const p = hpos(BU, .32); FX.txt(g, num(sc), cl(p.x, u * 90, w - u * 90), p.y, u * 34, sc < 0 ? '#ff4a3a' : '#fff', '#16192e', u * 9); }); }
       else if (t < 4.6) { cam(V, t, [.2, 1.3, .42], [-.88, 1.12, 0], .46, .44); W.flySticks(1e3, 0, .02, 120); cryP(BU, t, 1); BU.wh = .6; }
       else if (t < 7.2) { cam(V, t, [1.05, 1.55, 1.75], [-.45, 1.05, .45], .78, .7); W.flySticks(1e3, 0, .02, 120); BU.wh = .6; BU.hy = -.9 * ez(K(t, 4.6, 5.0)); BU.ey = .5; BU.br = .5; BU.mo = .2; W.cry(BU, t, .4); BU.reach('L', SF.g.position.clone().add(V3(-.2, 1.05, 0)), ez(K(t, 5.0, 5.5))); SF.hy = .9 * ez(K(t, 4.8, 5.2)); smile(SF, K(t, 5.6, 6)); mk(V, 'sweat', SF, 22, 0, 16, t); say(V, t, 5.0, 7.2, BU, 'e3_bu', { px: 16 }); }
       else { camDV(V, t); W.flySticks(1e3, 0, .02, 120); BU.wh = .6; BU.ey = .5; smile(SF, 1); SF.hL.set(-.25, 1.35, .1); SF.hR.set(.25, 1.35, .1); stampC(V, t, 7.2, 's_up', SF, 44, '#d89a00', -.12); if (t > 7.2 && t < 8.6) W.confetti(t, 1); shock(BK, K(t, 8.5, 8.7)); shock(ON, K(t, 8.8, 9.0)); stampC(V, t, 8.6, 's_kubi', BK, 36, '#d8201a', .15); stampC(V, t, 8.9, 's_kubi', ON, 36, '#d8201a', -.2); W.shake = t > 8.6 ? .015 * (1 - K(t, 8.9, 9.3)) : 0; }

@@ -1,9 +1,9 @@
 // 接待麻雀：流れ（タイトル→ムービー→迷う3秒→ロンの5秒→エンド→結果）・操作・通信・動画
-import { mkWorld, mkAtlas, THREE, K, cl, ez, eo, eb, lerp, V3, HANDS } from './world.js?v=7';
-import * as FX from './fx.js?v=7';
-import { audio, ctx as actx, out as aout, S as SND, runSfx, UI, now as anow } from './snd.js?v=7';
-import { TX, LANGS, RANK, RCOL, ORDER } from './tx.js?v=7';
-import { mkActs } from './acts.js?v=7';
+import { mkWorld, mkAtlas, THREE, K, cl, ez, eo, eb, lerp, V3, HANDS } from './world.js?v=8';
+import * as FX from './fx.js?v=8';
+import { audio, ctx as actx, out as aout, S as SND, runSfx, UI, now as anow } from './snd.js?v=8';
+import { TX, LANGS, RANK, RCOL, ORDER } from './tx.js?v=8';
+import { mkActs } from './acts.js?v=8';
 const $ = id => document.getElementById(id);
 const Q = new URLSearchParams(location.search);
 const TEST = Q.has('test'), STEP = Q.has('step'), OGP = Q.has('ogp'), ICON = Q.has('icon'), HOME = Q.has('homeimg');
