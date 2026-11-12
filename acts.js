@@ -1,13 +1,13 @@
 // 接待麻雀：場面（はじめのムービー・迷う3秒・ロンの5秒・それぞれのエンド）。どれも「場面が始まってからの秒 t」だけで絵が決まる
-import { TW, TH, TD, TY, cl, K, ez, eo, ei, eb, lerp, hash, V3, sp, HANDS } from './world.js?v=3';
-import * as FX from './fx.js?v=3';
+import { TW, TH, TD, TY, cl, K, ez, eo, ei, eb, lerp, hash, V3, sp, HANDS } from './world.js?v=5';
+import * as FX from './fx.js?v=5';
 export function mkActs(W, atlas) {
   const C = W.C, SF = C.sf, BK = C.bk, ON = C.on, BU = C.bu, ST = C.st, P1 = C.p1, P2 = C.p2, TRI = [SF, BK, ON];
   const D = (V, f) => V.q.push(f);
   const mix = (a, b, k) => a.map((x, i) => lerp(x, b[i], k));
   const cam = (V, t, p, l, hw, hh) => W.setCam(p, l, hw, hh || hw * .9, t);
   const DVP = [-.22, 3.0, 2.4], DVL = [-.02, .84, -.12];
-  const camDV = (V, t) => cam(V, t, DVP, DVL, .98, 1.25);
+  const camDV = (V, t) => cam(V, t, DVP, DVL, .98, 1.5);
   const hpos = (c, dy) => { const h = c.headW(); h.y += dy; return W.pj(h); };
   const num = n => (n < 0 ? '−' : '') + Math.abs(n).toLocaleString('en-US');
   const TS = (V, key) => key[0] === '#' ? key.slice(1) : V.T(key);
@@ -87,7 +87,7 @@ export function mkActs(W, atlas) {
   const discard = (t, a = 0, b = .45) => { const k = ez(K(t, a, b)), o = W.dr[3], m = o.m; m.position.lerpVectors(HOLD(a), o.pR, k); m.position.y += Math.sin(k * Math.PI) * .08; m.quaternion.slerpQuaternions(o.qH, o.qR, k); if (k < 1) { BU.reach('R', m.position.clone().add(V3(0, .04, 0)), 1); BU.ln = .22; } };
   A.dec = {
     len: 5.6, sfx: [[.43, 'clack', 1.6], [.46, 'zap', .7], [1.2, 'heart'], [2.2, 'heart'], [3.2, 'heart', 1.2], [4.0, 'heart', 1.3], [4.6, 'heart', 1.4], [5.1, 'heart', 1.5]],
-    run(t, V) { idle(t); draws(1, 1, 1, 0); discard(t); cam(V, t, DVP, DVL, lerp(.98, .9, ez(K(t, .6, 5.6))), 1.25); { const a = K(t, 3.4, 5.6) * (.55 + .45 * Math.sin(t * 9)); if (a > 0) D(V, () => { const g = V.g, r = Math.hypot(V.w, V.h) / 2, gr = g.createRadialGradient(V.w / 2, V.h / 2, r * .32, V.w / 2, V.h / 2, r); gr.addColorStop(0, 'rgba(255,40,30,0)'); gr.addColorStop(1, 'rgba(255,40,30,' + (.8 * a).toFixed(3) + ')'); g.fillStyle = gr; g.fillRect(0, 0, V.w, V.h); }); } const k = K(t, .4, .6); TRI.forEach(c => shock(c, k * .8)); if (t > .45) { whitePop(V, t); TRI.forEach((c, i) => D(V, () => { const p = hpos(c, .3); FX.slam(V.g, t - .5 - i * .08, '！', p.x + V.u * 20, p.y, V.u * 30, '#ff4a3a', '#fff', {}); })); } flashT(V, t, .43, .2, '#fff', .5); tags(V); hud(V); say(V, t, .1, 1.2, BU, 'd_bu'); }
+    run(t, V) { idle(t); draws(1, 1, 1, 0); discard(t); cam(V, t, DVP, DVL, lerp(.98, .9, ez(K(t, .6, 5.6))), lerp(1.5, 1.4, ez(K(t, .6, 5.6)))); { const a = K(t, 3.4, 5.6) * (.55 + .45 * Math.sin(t * 9)); if (a > 0) D(V, () => { const g = V.g, r = Math.hypot(V.w, V.h) / 2, gr = g.createRadialGradient(V.w / 2, V.h / 2, r * .32, V.w / 2, V.h / 2, r); gr.addColorStop(0, 'rgba(255,40,30,0)'); gr.addColorStop(1, 'rgba(255,40,30,' + (.8 * a).toFixed(3) + ')'); g.fillStyle = gr; g.fillRect(0, 0, V.w, V.h); }); } const k = K(t, .4, .6); TRI.forEach(c => shock(c, k * .8)); if (t > .45) { whitePop(V, t); TRI.forEach((c, i) => D(V, () => { const p = hpos(c, .3); FX.slam(V.g, t - .5 - i * .08, '！', p.x + V.u * 20, p.y, V.u * 30, '#ff4a3a', '#fff', {}); })); } flashT(V, t, .43, .2, '#fff', .5); tags(V); hud(V); say(V, t, .1, 1.2, BU, 'd_bu'); }
   };
 
   // ===== ロン！（3人で役満 → 部長が泣く → 連れていかれる → 「クビだからな」） =====
@@ -128,7 +128,7 @@ export function mkActs(W, atlas) {
         else if (t < 21.8) { cam(V, t, mix([.4, 1.5, .3], [.1, 1.42, -.1], K(t, 19.8, 21.2)), [-1.3, 1.25, -1.95], .66, .62); spoils(); W.chairs[3].rotation.x = -1.35; BU.wig.visible = false; BU.wh = 1;
           const out = ez(K(t, 21.15, 21.4)); W.door.rotation.y = -1.75 * (1 - ez(K(t, 21.2, 21.42))); BU.g.position.set(-1.3, 0, -1.9 - out * .9); BU.g.rotation.y = 0; BU.st = 1; angry(BU, 1, t); BU.ln = .15; BU.hR.set(.12, 1.42, .55); W.cry(BU, t, .6); BU.g.visible = out < 1;
           ST.g.visible = out < 1; ST.g.position.set(-1.3, 0, -2.5 - out * .5); ST.g.rotation.y = 0; ST.reach('L', BU.g.position.clone().add(V3(-.12, 1.15, -.1)), 1); ST.reach('R', BU.g.position.clone().add(V3(.12, 1.15, -.1)), 1);
-          if (out < 1) { mk(V, 'anger', BU, -40, -10, 30, t); } slamT(V, t, 20.0, 'bu_fire', .5, .2, 54, '#ff3b30', '#fff', { hold: 1.5, jit: V.u * 2, sh: '#7a0000' }); W.shake = t > 21.4 ? .03 * (1 - K(t, 21.4, 21.8)) : t > 20 && t < 20.4 ? .015 : 0; flashT(V, t, 20.0, .2, '#ff3b30', .4); }
+          if (out < 1) { mk(V, 'anger', BU, -40, -10, 30, t); } slamT(V, t, 20.0, 'bu_fire', .5, .2, 54, '#ff3b30', '#fff', { hold: 1.5, jit: V.u * 1.5, sw: .3 }); W.shake = t > 21.4 ? .03 * (1 - K(t, 21.4, 21.8)) : t > 20 && t < 20.4 ? .015 : 0; flashT(V, t, 20.0, .2, '#ff3b30', .4); }
         else { camDV(V, t); postRon(); TRI.forEach((c, i) => { say(V, t, 22.0 + i * .15, 99, c, 'dots', { px: 14 }); c.hy = [-.5, .9, .5][i] * 0 + 0; c.es = 1.1; }); hud(V); }
       }
     };

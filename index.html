@@ -32,10 +32,10 @@ body{position:fixed;inset:0}
 #fx{z-index:2}
 .gbtn{position:fixed;z-index:6;border:none;font-family:inherit;font-weight:900;touch-action:manipulation;cursor:pointer}
 #skipBtn{right:10px;top:calc(env(safe-area-inset-top,0px) + 10px);border-radius:10px;background:#ffffffd9;font-size:13px;padding:8px 12px;color:var(--ink)}
-#ronBtn{left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 104px);width:104px;height:104px;margin-left:-52px;border-radius:50%;color:#fff;font-size:28px;white-space:nowrap;padding:0;letter-spacing:0;background:radial-gradient(circle at 35% 30%,#ff7a5c,#e8261b 60%,#a3140c);box-shadow:0 6px 0 #6e0c06,0 0 0 6px #fff;text-shadow:0 2px 0 #7a0e08}
+#ronBtn{left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 124px);width:104px;height:104px;margin-left:-52px;border-radius:50%;color:#fff;font-size:28px;white-space:nowrap;padding:0;letter-spacing:0;background:radial-gradient(circle at 35% 30%,#ff7a5c,#e8261b 60%,#a3140c);box-shadow:0 6px 0 #6e0c06,0 0 0 6px #fff;text-shadow:0 2px 0 #7a0e08}
 #ronBtn:active{transform:translateY(4px);box-shadow:0 2px 0 #6e0c06,0 0 0 6px #fff}
-#ronRing{position:fixed;z-index:5;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 92px);width:128px;height:128px;margin-left:-64px;border-radius:50%;background:conic-gradient(#ffd84a calc(var(--p,1)*360deg),#0000 0);pointer-events:none;opacity:.95}
-#endBtn{left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 110px);transform:translateX(-50%);border-radius:12px;background:#fff;color:var(--ink);font-size:19px;padding:13px 42px;border:3px solid var(--ink);box-shadow:0 5px 0 #0007}
+#ronRing{position:fixed;z-index:5;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 112px);width:128px;height:128px;margin-left:-64px;border-radius:50%;background:conic-gradient(#ffd84a calc(var(--p,1)*360deg),#0000 0);pointer-events:none;opacity:.95}
+#endBtn{left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 128px);transform:translateX(-50%);border-radius:12px;background:#fff;color:var(--ink);font-size:19px;padding:13px 42px;border:3px solid var(--ink);box-shadow:0 5px 0 #0007}
 .panel{position:fixed;inset:0;z-index:10;display:flex;align-items:center;justify-content:center;background:#0006;padding:14px}
 #title.panel{background:#0004}
 #result.panel{background:#0003;align-items:flex-end;padding-bottom:calc(env(safe-area-inset-bottom,0px) + 10px)}
@@ -84,7 +84,7 @@ table.zk tr.god td{background:#fff3c4;font-weight:900}
 #recBadge{position:fixed;left:50%;top:6%;transform:translateX(-50%);z-index:30;background:#16192ee6;color:#fff;font-weight:800;padding:10px 16px;border-radius:14px;font-size:14px;pointer-events:none;white-space:nowrap}
 #soon .card h1{font-size:44px}#soonAt{font-size:20px;font-weight:900;color:#c4201c;margin:10px 0 2px}#soonLeft{font-size:26px;font-weight:900;font-variant-numeric:tabular-nums;margin:4px 0}
 @media (max-width:400px){.panel{padding:8px}.card{padding:14px 10px}}
-@media (max-height:700px){#title .card{padding:8px 12px}#title .card h1{font-size:30px}#tHow{font-size:12px!important;line-height:1.4!important}#title .card>button,#title .row button{padding:8px;margin-top:5px}#title #startBtn{padding:10px;font-size:17px}#langs{margin-top:6px}#langs button{padding:4px 9px;font-size:12px}#result.panel{padding:4px 6px calc(env(safe-area-inset-bottom,0px) + 4px)}#result .card{padding:6px 10px 8px}#rDesc{display:none}#rNew{margin-bottom:2px;font-size:12px}#rOrder{font-size:14px;margin:1px 0 3px}.stats{margin:0 0 4px}.stats b{font-size:14px}#againBtn{padding:9px;font-size:17px}.rows{display:flex;gap:6px}.rows .row{flex:1;gap:6px}#result .rows .row button{font-size:11.5px;padding:8px 1px;margin-top:5px}#ronBtn{bottom:calc(env(safe-area-inset-bottom,0px) + 92px);width:90px;height:90px;margin-left:-45px;font-size:24px}#ronRing{bottom:calc(env(safe-area-inset-bottom,0px) + 81px);width:112px;height:112px;margin-left:-56px}}
+@media (max-height:700px){#title .card{padding:8px 12px}#title .card h1{font-size:30px}#tHow{font-size:12px!important;line-height:1.4!important}#title .card>button,#title .row button{padding:8px;margin-top:5px}#title #startBtn{padding:10px;font-size:17px}#langs{margin-top:6px}#langs button{padding:4px 9px;font-size:12px}#result.panel{padding:4px 6px calc(env(safe-area-inset-bottom,0px) + 4px)}#result .card{padding:6px 10px 8px}#rDesc{display:none}#rNew{margin-bottom:2px;font-size:12px}#rOrder{font-size:14px;margin:1px 0 3px}.stats{margin:0 0 4px}.stats b{font-size:14px}#againBtn{padding:9px;font-size:17px}.rows{display:flex;gap:6px}.rows .row{flex:1;gap:6px}#result .rows .row button{font-size:11.5px;padding:8px 1px;margin-top:5px}#ronBtn{bottom:calc(env(safe-area-inset-bottom,0px) + 110px);width:90px;height:90px;margin-left:-45px;font-size:24px}#ronRing{bottom:calc(env(safe-area-inset-bottom,0px) + 99px);width:112px;height:112px;margin-left:-56px}}
 </style>
 <script>(function(){try{var G="settai-mahjong",IDS=["result"];
 function ev(n){try{if(typeof gtag==='function')gtag('event',n,{game:G});}catch(e){}}
@@ -219,6 +219,6 @@ if(document.body)go();else document.addEventListener('DOMContentLoaded',go);}cat
  </div>
 </div>
 
-<script type="module" src="main.js?v=3"></script>
+<script type="module" src="main.js?v=5"></script>
 </body>
 </html>
