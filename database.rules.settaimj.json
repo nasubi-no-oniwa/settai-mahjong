@@ -1,0 +1,42 @@
+{
+  "c": {
+    ".read": true,
+    "$k": {
+      ".write": "auth != null && $k.matches(/^(e[0-9]|e10|comp)$/) && newData.isNumber() && newData.val() === (data.exists() ? data.val() : 0) + 1 && !data.parent().parent().child('u/' + auth.uid + '/' + $k).exists() && newData.parent().parent().child('u/' + auth.uid + '/' + $k).exists()"
+    }
+  },
+  "u": {
+    "$uid": {
+      ".read": "auth != null && auth.uid === $uid",
+      "$k": {
+        ".write": "auth != null && auth.uid === $uid && !data.exists() && newData.exists() && $k.matches(/^(e[0-9]|e10|comp)$/) && newData.parent().parent().parent().child('c/' + $k).val() === (data.parent().parent().parent().child('c/' + $k).exists() ? data.parent().parent().parent().child('c/' + $k).val() : 0) + 1",
+        ".validate": "newData.val() === now"
+      }
+    }
+  },
+  "x": {
+    "$code": {
+      ".read": "$code.matches(/^[A-Z2-9]{8}$/)",
+      ".write": "auth != null && $code.matches(/^[A-Z2-9]{8}$/) && newData.exists() && (!data.exists() || data.child('u').val() === auth.uid)",
+      ".validate": "newData.hasChildren(['u', 'g', 's', 'c', 't'])",
+      "u": {
+        ".validate": "newData.val() === auth.uid"
+      },
+      "g": {
+        ".validate": "newData.isString() && newData.val().length <= 140 && newData.val().matches(/^-?[0-9]+(,-?[0-9]+){10}$/)"
+      },
+      "s": {
+        ".validate": "newData.isString() && newData.val().length <= 80 && newData.val().matches(/^[a-z0-9,]*$/)"
+      },
+      "c": {
+        ".validate": "newData.isNumber() && newData.val() % 1 === 0 && newData.val() >= -1 && newData.val() <= 100000000"
+      },
+      "t": {
+        ".validate": "newData.val() === now"
+      },
+      "$other": {
+        ".validate": false
+      }
+    }
+  }
+}

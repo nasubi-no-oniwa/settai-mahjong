@@ -1,1 +1,224 @@
-<!doctype html><meta charset="utf-8"><title>接待麻雀</title><p>準備中です。</p>
+<!doctype html>
+<html lang="ja">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-5RB6XMN0QR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-5RB6XMN0QR');
+</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<title>接待麻雀</title>
+<meta name="description" content="部長が、海底で白を切る。その白で、自分も部下も女同僚も役満。さあ、どうする？ エンドは全部で11種類。">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="なすびのお庭">
+<meta property="og:title" content="接待麻雀">
+<meta property="og:description" content="部長が、海底で白を切る。その白で、自分も部下も女同僚も役満。さあ、どうする？ エンドは全部で11種類。">
+<meta property="og:image" content="https://nasubi-no-oniwa.github.io/settai-mahjong/ogp.png">
+<meta property="og:url" content="https://nasubi-no-oniwa.github.io/settai-mahjong/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="icon.png">
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+<style>
+:root{--ink:#16192e;--sub:#5b647f;--red:#e8261b;--card:#ffffff}
+[hidden]{display:none!important}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;margin:0;background:#120d0a;color:var(--ink);font-family:"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic","Noto Sans CJK JP",system-ui,sans-serif;overflow:hidden;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;overscroll-behavior:none;touch-action:none}
+body{position:fixed;inset:0}
+#c,#fx{position:fixed;inset:0;width:100%;height:100%;display:block;touch-action:none}
+#fx{z-index:2}
+.gbtn{position:fixed;z-index:6;border:none;font-family:inherit;font-weight:900;touch-action:manipulation;cursor:pointer}
+#skipBtn{right:10px;top:calc(env(safe-area-inset-top,0px) + 10px);border-radius:10px;background:#ffffffd9;font-size:13px;padding:8px 12px;color:var(--ink)}
+#ronBtn{left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 104px);width:104px;height:104px;margin-left:-52px;border-radius:50%;color:#fff;font-size:28px;white-space:nowrap;padding:0;letter-spacing:0;background:radial-gradient(circle at 35% 30%,#ff7a5c,#e8261b 60%,#a3140c);box-shadow:0 6px 0 #6e0c06,0 0 0 6px #fff;text-shadow:0 2px 0 #7a0e08}
+#ronBtn:active{transform:translateY(4px);box-shadow:0 2px 0 #6e0c06,0 0 0 6px #fff}
+#ronRing{position:fixed;z-index:5;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 92px);width:128px;height:128px;margin-left:-64px;border-radius:50%;background:conic-gradient(#ffd84a calc(var(--p,1)*360deg),#0000 0);pointer-events:none;opacity:.95}
+#endBtn{left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 110px);transform:translateX(-50%);border-radius:12px;background:#fff;color:var(--ink);font-size:19px;padding:13px 42px;border:3px solid var(--ink);box-shadow:0 5px 0 #0007}
+.panel{position:fixed;inset:0;z-index:10;display:flex;align-items:center;justify-content:center;background:#0006;padding:14px}
+#title.panel{background:#0004}
+#result.panel{background:#0003;align-items:flex-end;padding-bottom:calc(env(safe-area-inset-bottom,0px) + 10px)}
+.card{background:var(--card);border:3px solid var(--ink);border-radius:16px;padding:16px;max-width:390px;width:100%;text-align:center;max-height:100%;overflow:auto;box-shadow:0 8px 0 #0005;-webkit-overflow-scrolling:touch;touch-action:pan-y}
+.card h1{margin:0 0 2px;font-size:38px;line-height:1.1;letter-spacing:.06em;font-weight:900;font-family:"Hiragino Mincho ProN","Yu Mincho","Noto Serif CJK JP",serif;color:#7a1408}
+.card h2{margin:0;font-size:22px;font-weight:900;line-height:1.25}
+.card p{margin:8px 0;line-height:1.6;font-size:14px;color:var(--sub);white-space:pre-line}
+.card button{display:block;width:100%;margin-top:8px;padding:13px;border:none;border-radius:11px;font-size:17px;font-weight:800;font-family:inherit;background:var(--red);color:#fff;cursor:pointer;touch-action:manipulation}
+.card button.sub{background:#e9ecf5;color:var(--ink);font-size:15px;padding:11px}
+.card button.x{background:#000;color:#fff}
+.card button.vid{background:#1f8a70;color:#fff}
+.card button.gold{background:linear-gradient(180deg,#ffcf4a,#e39a00);color:#3a1a00}
+.card button:disabled{opacity:.45}
+.card input{width:100%;font-size:18px;border-radius:10px;border:2px solid #c7cde0;padding:10px;font-family:inherit;margin-top:6px;text-align:center;background:#fff;letter-spacing:.2em;text-transform:uppercase;user-select:text;-webkit-user-select:text}
+.row{display:flex;gap:8px}.row button{flex:1;padding-left:4px;padding-right:4px}
+#langs{display:flex;gap:6px;justify-content:center;margin-top:8px;flex-wrap:wrap}
+#langs button{width:auto;flex:none;padding:6px 10px;font-size:13px;margin:0;background:#e9ecf5;color:var(--ink)}
+#langs button.on{background:var(--ink);color:#fff}
+#title .card{padding:12px 14px}#title .row button{font-size:13.5px;padding:10px 2px}#tSub{font-size:15px!important;font-weight:900;color:var(--ink)!important;margin:4px 0 2px!important}#tHow{font-size:13px!important;line-height:1.5!important;margin:2px 0 6px!important}
+#title #startBtn{padding:13px;font-size:19px;background:linear-gradient(180deg,#ff5a36,#e8261b);box-shadow:0 4px 0 #9c1710;margin-bottom:4px}
+.notice{font-size:12.5px!important;font-weight:900;color:#c4201c!important;background:#fff3d6;border-radius:8px;padding:5px 6px;margin:8px 0 0!important;line-height:1.35!important}
+#result .card{padding:10px 12px 12px}
+#rNew{font-size:13px;font-weight:900;color:#fff;background:linear-gradient(90deg,#ff3ea5,#ff9500);border-radius:99px;display:inline-block;padding:2px 12px;margin-bottom:5px}
+#rHeadRow{display:flex;align-items:center;justify-content:center;gap:8px}
+.rk{display:inline-block;min-width:38px;padding:3px 7px;border-radius:8px;color:#fff;font-weight:900;font-size:17px;line-height:1.15;flex:none}
+#rDesc{font-size:13px!important;margin:4px 0!important;line-height:1.4!important;color:var(--ink)!important}
+#rOrder{font-size:15px;font-weight:900;color:#c4201c;min-height:1.4em;margin:2px 0 5px}
+.stats{display:flex;gap:6px;margin:2px 0 6px}
+.stats div{flex:1;background:#f1f3fa;border-radius:9px;padding:3px 2px}
+.stats small{display:block;font-size:10px;color:var(--sub);font-weight:700}
+.stats b{display:block;font-size:15px;font-variant-numeric:tabular-nums;white-space:nowrap}
+#againBtn{font-size:19px;padding:12px;margin-top:0;background:linear-gradient(180deg,#ff5a36,#e8261b);box-shadow:0 4px 0 #9c1710;margin-bottom:4px}
+#againBtn:active{transform:translateY(3px);box-shadow:0 1px 0 #9c1710}
+#result .row button{font-size:14px;padding:9px 4px;margin-top:7px}
+.note{font-size:13px;min-height:1.3em;margin:6px 0!important}
+.note.err{color:#d23}.note.ok{color:#1f8a70;font-weight:800}
+table.zk{width:100%;border-collapse:collapse;font-size:14px;font-variant-numeric:tabular-nums}
+table.zk td{padding:7px 3px;border-bottom:1px solid #e6e9f2;text-align:left}
+table.zk td.ck{width:26px;font-size:17px;font-weight:900;color:#1f8a70;text-align:center}
+table.zk td.n{font-weight:900}table.zk tr.no td.n{color:#a0a7bd;letter-spacing:.1em}
+table.zk td.c{text-align:right;font-weight:900;white-space:nowrap;color:var(--sub)}
+table.zk tr.god td{background:#fff3c4;font-weight:900}
+#zBox{max-height:54vh;overflow:auto;-webkit-overflow-scrolling:touch}
+#hCode{font-size:30px;font-weight:900;letter-spacing:.18em;margin:6px 0;user-select:text;-webkit-user-select:text;color:var(--ink)}
+#vidPrev{width:100%;max-height:50vh;border-radius:12px;background:#000;display:block;margin:6px 0}
+#recBadge{position:fixed;left:50%;top:6%;transform:translateX(-50%);z-index:30;background:#16192ee6;color:#fff;font-weight:800;padding:10px 16px;border-radius:14px;font-size:14px;pointer-events:none;white-space:nowrap}
+#soon .card h1{font-size:44px}#soonAt{font-size:20px;font-weight:900;color:#c4201c;margin:10px 0 2px}#soonLeft{font-size:26px;font-weight:900;font-variant-numeric:tabular-nums;margin:4px 0}
+@media (max-width:400px){.panel{padding:8px}.card{padding:14px 10px}}
+@media (max-height:700px){#title .card{padding:8px 12px}#title .card h1{font-size:30px}#tHow{font-size:12px!important;line-height:1.4!important}#title .card>button,#title .row button{padding:8px;margin-top:5px}#title #startBtn{padding:10px;font-size:17px}#langs{margin-top:6px}#langs button{padding:4px 9px;font-size:12px}#result.panel{padding:4px 6px calc(env(safe-area-inset-bottom,0px) + 4px)}#result .card{padding:6px 10px 8px}#rDesc{display:none}#rNew{margin-bottom:2px;font-size:12px}#rOrder{font-size:14px;margin:1px 0 3px}.stats{margin:0 0 4px}.stats b{font-size:14px}#againBtn{padding:9px;font-size:17px}.rows{display:flex;gap:6px}.rows .row{flex:1;gap:6px}#result .rows .row button{font-size:11.5px;padding:8px 1px;margin-top:5px}#ronBtn{bottom:calc(env(safe-area-inset-bottom,0px) + 92px);width:90px;height:90px;margin-left:-45px;font-size:24px}#ronRing{bottom:calc(env(safe-area-inset-bottom,0px) + 81px);width:112px;height:112px;margin-left:-56px}}
+</style>
+<script>(function(){try{var G="settai-mahjong",IDS=["result"];
+function ev(n){try{if(typeof gtag==='function')gtag('event',n,{game:G});}catch(e){}}
+var o=window.open;window.open=function(u){try{if(/intent\/(post|tweet)/.test(String(u)))ev('x_share');}catch(e){}return o.apply(window,arguments);};
+if(!IDS.length)return;
+function vis(e){if(!e||!e.isConnected||e.closest('[hidden]'))return false;var r=e.getBoundingClientRect();if(r.width<1||r.height<1)return false;for(var n=e;n&&n.nodeType===1;n=n.parentElement){var s=getComputedStyle(n);if(s.display==='none'||s.visibility==='hidden'||parseFloat(s.opacity)<0.05)return false;}return true;}
+var was={};setInterval(function(){try{var any=false;for(var i=0;i<IDS.length;i++){if(vis(document.getElementById(IDS[i])))any=true;}if(any&&!was.v)ev('result_view');was.v=any;}catch(e){}},700);
+}catch(e){}})();</script>
+<!-- nasubi-ad: スマホのとき、結果画面とタイトル画面の決めた場所に広告の帯（と、決めた場所だけその下に大きい広告）を出す（遊んでいる最中は出さない・ボタンに重ねない・広告の幅320pxを切らない・画面が出たらすぐ見せるが、最初の1.2秒は押しても反応しない・画面が出るたびに新しい広告を読みこむ（場所ごとに30秒に1回まで）・画面が隠れて2秒たったら広告を外して止める・タイトル画面はタイトル用の広告枠を使う） -->
+<script>(function(){try{var C=[{"a": "#result .card", "v": "#result"}, {"a": "#title div.card", "v": "#title", "t": 1, "b": 1, "m": 20, "x": "", "x2": ""}],BIG=1,M=20,EX="",EX2="",AD='https://nasubi-no-oniwa.github.io/ad/',AD2='https://nasubi-no-oniwa.github.io/ad/big.html',TAD='https://nasubi-no-oniwa.github.io/ad/t.html',TAD2='https://nasubi-no-oniwa.github.io/ad/tbig.html',LOCK=1200,HOLD=2000,MIN=30000;
+if(/[?&]noad=1/.test(location.search))return;
+if(!/iPhone|iPod|Android|Mobile|Windows Phone|BlackBerry/i.test(navigator.userAgent||''))return;
+var S=[];
+function vis(e){if(!e||!e.isConnected||e.closest('[hidden]'))return false;var r=e.getBoundingClientRect();if(r.width<1||r.height<1)return false;for(var n=e;n&&n.nodeType===1;n=n.parentElement){var s=getComputedStyle(n);if(s.display==='none'||s.visibility==='hidden'||parseFloat(s.opacity)<0.05)return false;}return true;}
+function opt(i,k,d){return C[i][k]===undefined?d:C[i][k];}
+function mk(i){var b=document.createElement('div');b.className='nsb-ad';b.style.cssText='display:block;position:static;float:none;box-sizing:content-box;width:320px;min-width:320px;max-width:none;height:50px;margin:'+opt(i,'m',M)+'px calc((100% - 320px) / 2) 0;padding:0;border:0;background:none;box-shadow:none;border-radius:0;transform:none;overflow:hidden;flex:0 0 auto;align-self:center;'+opt(i,'x',EX);return b;}
+function mk2(i){var g=document.createElement('div');g.className='nsb-ad nsb-big';g.style.cssText='display:block;position:static;float:none;box-sizing:content-box;width:300px;min-width:300px;max-width:none;height:250px;margin:20px calc((100% - 300px) / 2) 0;padding:0;border:0;background:none;box-shadow:none;border-radius:0;transform:none;overflow:hidden;flex:0 0 auto;align-self:center;'+opt(i,'x2',EX2);return g;}
+function mkf(u,w,h){var f=document.createElement('iframe');f.title='ad';f.setAttribute('scrolling','no');f.width=w;f.height=h;f.style.cssText='border:0;margin:0;padding:0;width:'+w+'px;height:'+h+'px;display:block;max-width:none;visibility:hidden;pointer-events:none';f.src=u;return f;}
+function place(){for(var i=0;i<C.length;i++){var a=document.querySelector(C[i].a);if(!a)continue;var s=S[i]||(S[i]={b:mk(i),g:opt(i,'b',BIG)?mk2(i):null,on:false,since:0,hid:0,last:0,f:null,f2:null});var b=s.b;
+if(C[i].p==='first'){if(a.firstElementChild!==b)a.insertBefore(b,a.firstChild);}else if(b.parentNode!==a)a.appendChild(b);
+if(s.g&&b.nextSibling!==s.g)a.insertBefore(s.g,b.nextSibling);}}
+function off(s,now){if(s.f){s.f.style.visibility='hidden';s.f.style.pointerEvents='none';}if(s.f2){s.f2.style.visibility='hidden';s.f2.style.pointerEvents='none';}s.on=false;s.since=0;s.hid=now;}
+function kill(s){if(s.f){if(s.f.parentNode)s.f.parentNode.removeChild(s.f);s.f=null;}if(s.f2){if(s.f2.parentNode)s.f2.parentNode.removeChild(s.f2);s.f2=null;}}
+function tick(){try{place();var k=-1,i,s,res=false,now=Date.now();
+for(i=0;i<C.length;i++){s=S[i];if(!C[i].t&&s&&vis(document.querySelector(C[i].v))&&vis(s.b)){k=i;res=true;break;}}
+if(k<0)for(i=0;i<C.length;i++){s=S[i];if(C[i].t&&s&&vis(document.querySelector(C[i].v))&&vis(s.b)){k=i;break;}}
+if(document.hidden)k=-1;
+for(i=0;i<C.length;i++){s=S[i];if(!s)continue;
+if(C[i].t){var d=(res&&vis(document.querySelector(C[i].v)))?'none':'block';if(s.b.style.display!==d){s.b.style.display=d;if(s.g)s.g.style.display=d;}}
+if(i!==k){if(s.on)off(s,now);if(s.f&&now-s.hid>=HOLD&&now-s.last>=MIN)kill(s);}}
+if(k<0)return;
+s=S[k];
+if(!s.on){s.on=true;s.since=now;}
+if(!s.f){var t=!!C[k].t;s.f=mkf(t?TAD:AD,320,50);s.b.appendChild(s.f);if(s.g){s.f2=mkf(t?TAD2:AD2,300,250);s.g.appendChild(s.f2);}s.last=now;}
+if(s.f.parentNode!==s.b)s.b.appendChild(s.f);if(s.f2&&s.f2.parentNode!==s.g)s.g.appendChild(s.f2);
+var pe=(now-s.since<LOCK)?'none':'auto';
+s.f.style.visibility='visible';s.f.style.pointerEvents=pe;if(s.f2){s.f2.style.visibility='visible';s.f2.style.pointerEvents=pe;}
+}catch(_){}}
+function go(){place();try{new MutationObserver(place).observe(document.body,{childList:true,subtree:true});}catch(_){}setInterval(tick,300);}
+if(document.body)go();else document.addEventListener('DOMContentLoaded',go);
+}catch(e){}})();</script>
+<!-- nasubi-next: 結果画面に「次のゲーム」を出す（右にスライドするか押すと、おすすめの画面。中身は nasubi-no-oniwa.github.io/next/next.js で全作品共通） -->
+<script>window.NSB_NEXT={"g": "settai-mahjong", "r": [{"a": "#result .card", "v": "#result"}], "ad": 1};</script>
+<script src="https://nasubi-no-oniwa.github.io/next/next.js" defer></script>
+<!-- 広告の確認用：アドレスの最後に ?adcheck=1 をつけて開くと、広告の枠の中で何が起きているかを画面の上に字で出す（ふだんは何もしない） -->
+<script>(function(){try{if(!/[?&]adcheck=1/.test(location.search))return;var t0=Date.now();
+function go(){var box=document.createElement('div');box.style.cssText='position:fixed;left:4px;top:4px;right:4px;z-index:99;background:rgba(0,0,0,.88);color:#7CFC8A;font:11px/1.4 monospace;padding:6px;border-radius:6px;white-space:pre-wrap;word-break:break-all;pointer-events:none';document.body.appendChild(box);
+setInterval(function(){var L=[],a=document.querySelectorAll('.nsb-ad');L.push('広告の確認 '+((Date.now()-t0)/1000).toFixed(0)+'秒  スマホ判定='+/iPhone|iPod|Android|Mobile|Windows Phone|BlackBerry/i.test(navigator.userAgent||'')+'  枠の数='+a.length+'  通信='+(navigator.onLine?'あり':'なし'));
+for(var i=0;i<a.length;i++){var e=a[i],r=e.getBoundingClientRect(),f=e.querySelector('iframe'),s='['+(i+1)+'] '+(e.closest('#title')?'タイトル':e.closest('#result')?'結果':'?')+(e.classList.contains('nsb-big')?'・大':'・帯')+' 場所='+Math.round(r.width)+'x'+Math.round(r.height)+' 上から'+Math.round(r.top);
+if(!f){s+=' → iframeなし';}else{s+=' → '+f.src.replace(/^.*\/ad\//,'ad/')+' 表示='+(f.style.visibility||'-');try{var d=f.contentDocument;if(!d){s+=' 中身=読めない';}else{var b=d.body;s+=' 読みこみ='+d.readyState+' 場所='+(d.location?String(d.location.pathname).slice(-12):'?')+' 部品='+(b?b.querySelectorAll('*').length:'-')+'(iframe'+(b?b.querySelectorAll('iframe').length:0)+' img'+(b?b.querySelectorAll('img').length:0)+' a'+(b?b.querySelectorAll('a').length:0)+' script'+(b?b.querySelectorAll('script').length:0)+') 高さ='+(b?b.scrollHeight:'-')+' 字='+(b?String(b.innerText||'').replace(/\s+/g,' ').slice(0,30):'');var n=b&&b.querySelector('iframe');if(n){var q=n.getBoundingClientRect();s+=' 中のiframe='+String(n.src||'(srcなし)').replace(/^https?:\/\//,'').slice(0,36)+' '+Math.round(q.width)+'x'+Math.round(q.height);}}}catch(x){s+=' 中身=エラー '+String(x).slice(0,50);}}
+L.push(s);}box.textContent=L.join('\n');},1000);}
+if(document.body)go();else document.addEventListener('DOMContentLoaded',go);}catch(e){}})();</script>
+</head>
+<body>
+<canvas id="c"></canvas>
+<canvas id="fx"></canvas>
+<button class="gbtn" id="skipBtn" hidden></button>
+<div id="ronRing" hidden></div>
+<button class="gbtn" id="ronBtn" hidden></button>
+<button class="gbtn" id="endBtn" hidden></button>
+
+<div class="panel" id="soon" hidden>
+ <div class="card">
+  <h1 id="soonTitle"></h1>
+  <p id="soonSub"></p>
+  <div id="soonAt"></div>
+  <div id="soonLeft"></div>
+  <p id="soonNote"></p>
+ </div>
+</div>
+
+<div class="panel" id="title" hidden>
+ <div class="card">
+  <h1 id="tTitle"></h1>
+  <p id="tSub"></p>
+  <p id="tHow"></p>
+  <button id="startBtn"></button>
+  <p class="notice" id="tNotice"></p>
+  <div class="row"><button class="sub" id="zBtn"></button><button class="sub" id="hBtn"></button></div>
+  <div id="langs"></div>
+ </div>
+</div>
+
+<div class="panel" id="result" hidden>
+ <div class="card">
+  <div id="rNew"></div>
+  <div id="rHeadRow"><span class="rk" id="rRank"></span><h2 id="rName"></h2></div>
+  <p id="rDesc"></p>
+  <div id="rOrder"></div>
+  <div class="stats"><div><small id="sP1"></small><b id="sP2"></b></div><div><small id="sG1"></small><b id="sG2"></b></div></div>
+  <button id="againBtn"></button>
+  <div class="rows"><div class="row"><button class="vid" id="vidBtn"></button><button class="x" id="xBtn"></button></div>
+  <div class="row"><button class="sub" id="rList"></button><button class="sub" id="rTop"></button></div></div>
+ </div>
+</div>
+
+<div class="panel" id="vidPanel" hidden>
+ <div class="card">
+  <video id="vidPrev" playsinline controls loop></video>
+  <p class="note" id="vMsg"></p>
+  <button class="x" id="vShare"></button>
+  <button id="vSave"></button>
+  <button class="x" id="vX"></button>
+  <button class="sub" id="vBack"></button>
+ </div>
+</div>
+<div id="recBadge" hidden></div>
+
+<div class="panel" id="zPanel" hidden>
+ <div class="card">
+  <h2 id="zTitle"></h2>
+  <p class="notice" id="zNotice"></p>
+  <p class="note" id="zFound"></p>
+  <div id="zBox"></div>
+  <button class="gold" id="zGod" hidden></button>
+  <p class="note" id="zNote"></p>
+  <button class="sub" id="zBack"></button>
+ </div>
+</div>
+
+<div class="panel" id="hPanel" hidden>
+ <div class="card">
+  <h2 id="hTitle"></h2>
+  <p id="hNote"></p>
+  <button id="hMake"></button>
+  <div id="hCode"></div>
+  <p class="note" id="hMsg1"></p>
+  <input id="hIn" maxlength="8" autocomplete="off" autocapitalize="characters" spellcheck="false">
+  <button class="sub" id="hLoad"></button>
+  <p class="note" id="hMsg2"></p>
+  <button class="sub" id="hBack"></button>
+ </div>
+</div>
+
+<script type="module" src="main.js?v=1"></script>
+</body>
+</html>
